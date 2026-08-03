@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Креслення за розміром</title>
+<style>
+  :root {
+    --bg: #14150f;
+    --panel: #1c1e16;
+    --line: rgba(246, 242, 236, 0.12);
+    --text: #f6f2ec;
+    --muted: #9a9b8d;
+    --accent: #c9a97e;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+
+  .wrap { width: min(620px, 100%); }
+
+  .stage {
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, #1a1c14, #101208);
+    padding: 8px;
+  }
+
+  svg { display: block; width: 100%; height: auto; }
+
+  /* Плита та ноги їдуть плавно — міняються тільки координати, не розмітка. */
+  .desk-slab, .desk-slab-edge, .desk-slab-hl, .desk-beam, .col, .props {
+    transition: y 0.45s var(--ease), height 0.45s var(--ease), transform 0.45s var(--ease);
+  }
+
+  .panel {
+    margin-top: 22px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 18px 20px;
+  }
+
+  .row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+
+  .label { font: 600 11px/1 var(--mono); letter-spacing: 0.18em; color: var(--muted); }
+  .value { font: 600 28px/1 var(--mono); color: var(--accent); }
+  .value span { font-size: 14px; color: var(--muted); margin-left: 4px; }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    margin-top: 18px;
+    height: 2px;
+    background: var(--line);
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--bg);
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+
+  .marks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font: 500 11px/1 var(--mono);
+    color: var(--muted);
+  }
+
+  .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+
+  .presets button {
+    font: 500 12px/1 inherit;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+  }
+  .presets button:hover { color: var(--text); border-color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="stage">
+    <svg id="desk" viewBox="0 0 600 400" role="img" aria-labelledby="deskTitle" preserveAspectRatio="xMidYMax meet">
+      <title id="deskTitle">Стіл з регулюванням висоти</title>
+
+      <defs>
+        <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#000" stop-opacity=".35" />
+          <stop offset="1" stop-color="#000" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+
+      <ellipse cx="300" cy="378" rx="226" ry="15" fill="url(#floor)" />
+
+      <!-- Ноги: стопа, зовнішня, середня і внутрішня секції колони -->
+      <g id="legs"></g>
+
+      <!-- Стільниця -->
+      <g id="top"></g>
+
+      <!-- Реквізит на стільниці, щоб масштаб читався -->
+      <g id="props" class="props"></g>
+
+      <!-- Виносний розмір -->
+      <g id="dim"></g>
+    </svg>
+  </div>
+
+  <div class="panel">
+    <div class="row">
+      <span class="label">Висота стільниці</span>
+      <span class="value"><span id="cm">112</span><span>см</span></span>
+    </div>
+
+    <input id="range" type="range" min="70" max="130" value="112" step="1"
+           aria-label="Висота стільниці в сантиметрах" />
+
+    <div class="marks"><span>70</span><span>100</span><span>130</span></div>
+
+    <div class="presets">
+      <button type="button" data-h="72">Сидячи 72</button>
+      <button type="button" data-h="94">Крісло-сідло 94</button>
+      <button type="button" data-h="112">Стоячи 112</button>
+      <button type="button" data-h="126">Високо 126</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var H_MIN = 70, H_MAX = 130;
+  var TOP = '#C9A97E', EDGE = '#B08F65', FRAME = '#2A2C24', FRAME_DARK = '#1F211B';
+  var HALF_W = 236, CX = 300, LEG_OFFSET = HALF_W - 78;
+
+  var svgNS = 'http://www.w3.org/2000/svg';
+
+  /**
+   * Уся геометрія виводиться з однієї величини — висоти в сантиметрах.
+   * Це і є шаблон: параметр → перемальоване креслення.
+   */
+  function geometry(heightCm) {
+    var clamped = Math.min(H_MAX, Math.max(H_MIN, heightCm));
+    var t = (clamped - H_MIN) / (H_MAX - H_MIN);
+    var topY = 258 - t * 148;          // 258 (низько) → 110 (високо)
+    var slabBottom = topY + 16;
+    return { topY: topY, slabBottom: slabBottom, L: 372 - slabBottom };
+  }
+
+  function el(name, attrs) {
+    var node = document.createElementNS(svgNS, name);
+    for (var key in attrs) node.setAttribute(key, attrs[key]);
+    return node;
+  }
+
+  function legGroup(cx, g) {
+    var frag = document.createDocumentFragment();
+    frag.appendChild(el('rect', { x: cx - 55, y: 360, width: 110, height: 13, rx: 5, fill: FRAME_DARK }));
+    frag.appendChild(el('rect', { x: cx - 55, y: 360, width: 110, height: 4, rx: 2, fill: FRAME, opacity: '.55' }));
+    frag.appendChild(el('rect', { class: 'col', x: cx - 19, y: 360 - g.L * 0.56, width: 38, height: g.L * 0.56, rx: 3, fill: FRAME_DARK }));
+    frag.appendChild(el('rect', { class: 'col', x: cx - 15, y: g.slabBottom + g.L * 0.2, width: 30, height: g.L * 0.46, rx: 3, fill: FRAME }));
+    frag.appendChild(el('rect', { class: 'col', x: cx - 11, y: g.slabBottom - 1, width: 22, height: g.L * 0.44, rx: 3, fill: FRAME_DARK }));
+    frag.appendChild(el('rect', { class: 'col', x: cx - 11, y: g.slabBottom - 1, width: 4, height: g.L * 0.44, rx: 2, fill: '#fff', opacity: '.13' }));
+    return frag;
+  }
+
+  var legs = document.getElementById('legs');
+  var topGroup = document.getElementById('top');   // не 'top': це зайняте вікном імʼя
+  var props = document.getElementById('props');
+  var dim = document.getElementById('dim');
+  var range = document.getElementById('range');
+  var cmLabel = document.getElementById('cm');
+
+  function draw(heightCm) {
+    var g = geometry(heightCm);
+
+    legs.textContent = '';
+    legs.appendChild(legGroup(CX - LEG_OFFSET, g));
+    legs.appendChild(legGroup(CX + LEG_OFFSET, g));
+
+    topGroup.textContent = '';
+    topGroup.appendChild(el('rect', { class: 'desk-beam', x: CX - LEG_OFFSET - 24, y: g.topY + 16, width: LEG_OFFSET * 2 + 48, height: 11, rx: 3, fill: FRAME_DARK }));
+    topGroup.appendChild(el('rect', { class: 'desk-slab', x: CX - HALF_W, y: g.topY, width: HALF_W * 2, height: 16, rx: 3, fill: TOP }));
+    topGroup.appendChild(el('rect', { class: 'desk-slab-edge', x: CX - HALF_W, y: g.topY + 11, width: HALF_W * 2, height: 5, rx: 2.5, fill: EDGE }));
+    topGroup.appendChild(el('rect', { class: 'desk-slab-hl', x: CX - HALF_W, y: g.topY, width: HALF_W * 2, height: 3, rx: 1.5, fill: '#fff', opacity: '.22' }));
+
+    // Монітор і кухоль — щоб висота читалась відносно чогось знайомого
+    props.setAttribute('transform', 'translate(0 ' + (g.topY - 258) + ')');
+    if (!props.childNodes.length) {
+      props.appendChild(el('rect', { x: 252, y: 162, width: 128, height: 80, rx: 4, fill: '#2A2C24' }));
+      props.appendChild(el('rect', { x: 256, y: 166, width: 120, height: 72, rx: 2, fill: TOP, opacity: '.28' }));
+      props.appendChild(el('rect', { x: 306, y: 242, width: 20, height: 12, fill: '#2A2C24' }));
+      props.appendChild(el('rect', { x: 288, y: 252, width: 56, height: 6, rx: 3, fill: '#2A2C24' }));
+      props.appendChild(el('rect', { x: 424, y: 236, width: 22, height: 22, rx: 3, fill: '#1F4D3D' }));
+    }
+
+    // Виносний розмір збоку
+    dim.textContent = '';
+    var x = CX + HALF_W + 26;
+    dim.appendChild(el('line', { x1: x, y1: g.slabBottom, x2: x, y2: 373, stroke: '#C9A97E', 'stroke-width': 1, opacity: '.5' }));
+    dim.appendChild(el('line', { x1: x - 6, y1: g.slabBottom, x2: x + 6, y2: g.slabBottom, stroke: '#C9A97E', 'stroke-width': 1, opacity: '.5' }));
+    dim.appendChild(el('line', { x1: x - 6, y1: 373, x2: x + 6, y2: 373, stroke: '#C9A97E', 'stroke-width': 1, opacity: '.5' }));
+
+    var text = el('text', {
+      x: x + 12, y: (g.slabBottom + 373) / 2,
+      fill: '#C9A97E', 'font-size': 15, 'font-family': 'ui-monospace, monospace',
+      'dominant-baseline': 'middle',
+    });
+    text.textContent = heightCm + ' см';
+    dim.appendChild(text);
+
+    cmLabel.textContent = heightCm;
+  }
+
+  range.addEventListener('input', function () { draw(+range.value); });
+
+  document.querySelectorAll('.presets button').forEach(function (button) {
+    button.addEventListener('click', function () {
+      range.value = button.dataset.h;
+      draw(+button.dataset.h);
+    });
+  });
+
+  draw(+range.value);
+</script>
+</body>
+</html>

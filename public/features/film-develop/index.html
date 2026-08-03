@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Знімок, що проявляється</title>
+<style>
+  :root {
+    --bg: #0c0b0a;
+    --panel: #161512;
+    --line: rgba(255, 255, 255, 0.1);
+    --text: #f0ece4;
+    --muted: #8d8880;
+    --accent: #e8734a;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+
+  .camera { width: min(420px, 100%); }
+
+  /* ── Знімок ─────────────────────────────────────────────── */
+
+  .print {
+    position: relative;
+    background: #f6f2ea;
+    padding: 14px 14px 56px;      /* широкий низ — як у полароїда */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+    transform: rotate(-1.2deg);
+  }
+
+  .frame {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  /* «Фотографія» намальована градієнтами — файл лишається самодостатнім
+     і не тягне жодного зображення. */
+  .shot { position: absolute; inset: 0; }
+
+  .shot-1 {
+    background:
+      radial-gradient(60% 45% at 72% 26%, #ffd9a3 0%, transparent 60%),
+      linear-gradient(180deg, #2f6f9e 0%, #7fb0c9 46%, #d9b98a 47%, #a3713f 100%);
+  }
+  .shot-2 {
+    background:
+      radial-gradient(40% 30% at 28% 22%, #fff1c9 0%, transparent 65%),
+      linear-gradient(200deg, #45325c 0%, #a95d6b 52%, #e0925f 100%);
+  }
+  .shot-3 {
+    background:
+      radial-gradient(70% 50% at 50% 80%, #1d3b2a 0%, transparent 70%),
+      linear-gradient(160deg, #cfd8c3 0%, #6f8a63 55%, #263a24 100%);
+  }
+
+  /* Зерно поверх кадру */
+  .frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.16;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Хімія. Кадр виходить з чорноти: спершу тільки контраст, потім колір. */
+  @keyframes develop {
+    0%   { filter: brightness(0.02) contrast(3) saturate(0);   opacity: 1; }
+    14%  { filter: brightness(0.10) contrast(2.4) saturate(0);  }
+    38%  { filter: brightness(0.34) contrast(1.7) saturate(0.25); }
+    64%  { filter: brightness(0.66) contrast(1.28) saturate(0.6); }
+    85%  { filter: brightness(0.92) contrast(1.06) saturate(0.9); }
+    100% { filter: none; }
+  }
+
+  .frame .shot { filter: none; }
+  .developing .shot { animation: develop 5.2s var(--ease) forwards; }
+
+  .caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    text-align: center;
+    font: 600 11px/1 var(--mono);
+    letter-spacing: 0.18em;
+    color: #6a6259;
+  }
+
+  /* ── Панель камери ──────────────────────────────────────── */
+
+  .panel {
+    margin-top: 34px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .readout {
+    font: 500 12px/1.5 var(--mono);
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .readout b { color: var(--text); font-weight: 600; }
+
+  .counter { font: 600 12px/1 var(--mono); letter-spacing: 0.14em; color: var(--muted); }
+  .counter i { font-style: normal; color: var(--accent); }
+
+  .shutter {
+    font: 600 13px/1 inherit;
+    letter-spacing: 0.06em;
+    padding: 13px 24px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: var(--accent);
+    color: #170a05;
+    cursor: pointer;
+    transition: opacity 0.3s var(--ease), transform 0.15s var(--ease);
+  }
+  .shutter:hover { opacity: 0.88; }
+  .shutter:active { transform: scale(0.97); }
+  .shutter[disabled] { opacity: 0.35; cursor: not-allowed; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .developing .shot { animation-duration: 0.01ms; }
+  }
+</style>
+</head>
+<body>
+<div class="camera">
+  <div class="print" id="print">
+    <div class="frame">
+      <div class="shot shot-1" id="shot"></div>
+    </div>
+    <div class="caption" id="caption">PRESS THE SHUTTER</div>
+  </div>
+
+  <div class="panel">
+    <div>
+      <div class="readout" id="readout">READY</div>
+      <div class="counter" id="counter">EXPOSURES <i>8</i>/8</div>
+    </div>
+    <button class="shutter" id="shutter" type="button">Затвор</button>
+  </div>
+</div>
+
+<script>
+  var SHOTS = ['shot-1', 'shot-2', 'shot-3'];
+  var PACK = 8;              // кадрів у пачці
+  var REAL_SECONDS = 90;     // скільки це триває насправді
+  var ANIM_MS = 5200;        // скільки триває анімація
+
+  var print = document.getElementById('print');
+  var shot = document.getElementById('shot');
+  var caption = document.getElementById('caption');
+  var readout = document.getElementById('readout');
+  var counter = document.getElementById('counter');
+  var shutter = document.getElementById('shutter');
+
+  var left = PACK;
+  var index = 0;
+  var busy = false;
+  var timer = null;
+
+  function setCounter() {
+    counter.innerHTML = 'EXPOSURES <i>' + left + '</i>/' + PACK;
+  }
+
+  function expose() {
+    if (busy) return;
+
+    if (left === 0) {
+      // Пачка скінчилась — перезаряджаємо.
+      left = PACK;
+      setCounter();
+      readout.textContent = 'NEW PACK LOADED';
+      caption.textContent = 'PRESS THE SHUTTER';
+      shutter.textContent = 'Затвор';
+      return;
+    }
+
+    busy = true;
+    left--;
+    setCounter();
+
+    index = (index + 1) % SHOTS.length;
+    shot.className = 'shot ' + SHOTS[index];
+
+    print.classList.remove('developing');
+    void print.offsetWidth;              // перезапускаємо анімацію
+    print.classList.add('developing');
+
+    // 90 справжніх секунд, стиснуті в 5.2 с анімації.
+    var t = 0;
+    var step = REAL_SECONDS / (ANIM_MS / 100);
+    clearInterval(timer);
+
+    timer = setInterval(function () {
+      t += step;
+      if (t >= REAL_SECONDS) {
+        clearInterval(timer);
+        busy = false;
+        readout.textContent = 'DEVELOPED — ' + REAL_SECONDS + 's';
+        caption.textContent = left > 0 ? 'PRESS AGAIN' : 'PACK EMPTY';
+        shutter.textContent = left > 0 ? 'Затвор' : 'Перезарядити';
+        return;
+      }
+      caption.textContent = 'DEVELOPING';
+      readout.innerHTML =
+        'DEVELOPING <b>' + String(Math.floor(t)).padStart(2, '0') + 's</b> / ' + REAL_SECONDS + 's';
+    }, 100);
+  }
+
+  shutter.addEventListener('click', expose);
+  setCounter();
+</script>
+</body>
+</html>

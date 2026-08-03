@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Поява секцій при скролі</title>
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --panel: #131519;
+    --line: rgba(255, 255, 255, 0.09);
+    --text: #ecedef;
+    --muted: #8b8f96;
+    --accent: #7cc7ff;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 24px 30vh;
+  }
+
+  .wrap { max-width: 620px; margin: 0 auto; }
+
+  header { min-height: 62vh; display: flex; flex-direction: column; justify-content: center; }
+  h1 { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; }
+  .lede { color: var(--muted); font-size: 14px; margin-top: 8px; }
+  .scroll-cue { margin-top: 28px; font-size: 12px; letter-spacing: 0.18em; color: var(--accent); }
+
+  section {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 28px;
+    margin-top: 22vh;
+  }
+
+  h2 { font-size: 20px; font-weight: 600; }
+  section p { color: var(--muted); font-size: 14px; margin-top: 8px; }
+
+  /* ── Ядро фічі ─────────────────────────────────────────────
+     Початковий стан — ВИДИМИЙ. Ховає елемент тільки клас .reveal,
+     який ставить сам JS і тільки якщо анімація доречна. Якщо скрипт
+     не виконався — контент лишається на екрані, а не зникає назавжди.
+     ─────────────────────────────────────────────────────────── */
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.7s var(--ease),
+      transform 0.7s var(--ease);
+    transition-delay: var(--delay, 0s);
+  }
+
+  .reveal.in { opacity: 1; transform: none; }
+
+  .cascade > * { transition-delay: calc(var(--i, 0) * 90ms); }
+
+  .row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .chip {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .status {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    background: rgba(10, 11, 13, 0.88);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 16px;
+    backdrop-filter: blur(8px);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Поява секцій при скролі</h1>
+    <p class="lede">Блоки підʼїжджають знизу, коли входять у видиму частину. Один раз, без повторів.</p>
+    <p class="scroll-cue">ГОРТАЙ ↓</p>
+  </header>
+
+  <section data-reveal>
+    <h2>Один раз і назавжди</h2>
+    <p>Спостерігач знімає елемент з нагляду одразу після появи. Блок не мигає туди-сюди,
+       коли користувач гортає вгору-вниз.</p>
+  </section>
+
+  <section data-reveal>
+    <h2>Каскад</h2>
+    <p>Дітям можна роздати затримку — і вони зʼявляться по черзі, а не одночасно.</p>
+    <div class="row cascade" data-cascade>
+      <span class="chip">перший</span>
+      <span class="chip">другий</span>
+      <span class="chip">третій</span>
+      <span class="chip">четвертий</span>
+    </div>
+  </section>
+
+  <section data-reveal>
+    <h2>Поважає налаштування</h2>
+    <p>За <code>prefers-reduced-motion: reduce</code> анімації немає взагалі: блоки просто
+       на місці. Це не «швидша анімація», а її відсутність.</p>
+  </section>
+
+  <section data-reveal>
+    <h2>Не ламається без JS</h2>
+    <p>Клас, що ховає елемент, ставить сам скрипт. Немає скрипта — немає й приховування.</p>
+  </section>
+</div>
+
+<div class="status" id="status">Показано: 0 із 4</div>
+
+<script>
+  (function () {
+    var MARGIN = '0px 0px -80px 0px';   // спрацьовує трохи раніше нижнього краю
+    var THRESHOLD = 0.1;
+
+    var targets = document.querySelectorAll('[data-reveal]');
+    var status = document.getElementById('status');
+    var shown = 0;
+
+    function count() {
+      status.textContent = 'Показано: ' + shown + ' із ' + targets.length;
+    }
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Без IntersectionObserver або з вимкненою анімацією нічого не ховаємо.
+    if (reduced || !('IntersectionObserver' in window)) {
+      shown = targets.length;
+      count();
+      return;
+    }
+
+    // Ховаємо тільки зараз, коли точно знаємо, що зможемо показати назад.
+    targets.forEach(function (el) { el.classList.add('reveal'); });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add('in');
+        shown++;
+        count();
+
+        var cascade = entry.target.querySelector('[data-cascade]');
+        if (cascade) {
+          Array.prototype.forEach.call(cascade.children, function (child, i) {
+            child.style.setProperty('--i', i);
+            child.classList.add('reveal', 'in');
+          });
+        }
+
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: THRESHOLD, rootMargin: MARGIN });
+
+    targets.forEach(function (el) { observer.observe(el); });
+    count();
+  })();
+</script>
+</body>
+</html>

@@ -43,7 +43,9 @@
       "TETR"
     ],
     "status": "done",
-    "featureSlugs": [],
+    "featureSlugs": [
+      "desk-height-demo"
+    ],
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-22",
@@ -68,7 +70,9 @@
       "TETR"
     ],
     "status": "done",
-    "featureSlugs": [],
+    "featureSlugs": [
+      "film-develop"
+    ],
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-22",
@@ -92,7 +96,10 @@
       "delivery"
     ],
     "status": "finishing",
-    "featureSlugs": [],
+    "featureSlugs": [
+      "scroll-reveal",
+      "magnetic-hover"
+    ],
     "nextStep": "Проставити TELEGRAM_BOT_TOKEN і CHAT_ID на Vercel",
     "blocker": "",
     "lastTouched": "2026-06-30",

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Магнітне притягання до курсора</title>
+<style>
+  :root {
+    --bg: #0a0c0f;
+    --panel: #14171c;
+    --line: rgba(255, 255, 255, 0.1);
+    --text: #eceef1;
+    --muted: #8a8f97;
+    --accent: #8fd4c1;
+    --accent-ink: #06140f;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+
+  .wrap { width: min(560px, 100%); text-align: center; }
+
+  h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
+  .lede { color: var(--muted); font-size: 14px; margin-top: 8px; }
+
+  .stage {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 24px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  /* Обгортка ловить мишу в радіусі, більшому за саму кнопку —
+     інакше притягання починалось би вже під курсором і не читалось. */
+  .magnet {
+    display: inline-grid;
+    place-items: center;
+    padding: 30px;
+    margin: -30px;
+  }
+
+  .magnet > * {
+    will-change: transform;
+    transition: transform 0.45s var(--ease);
+  }
+
+  /* Поки миша всередині — керує JS, плавність дає лерп, не transition. */
+  .magnet.active > * { transition: none; }
+
+  .btn {
+    font: 600 14px/1 inherit;
+    letter-spacing: 0.04em;
+    padding: 16px 30px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: var(--accent);
+    color: var(--accent-ink);
+    cursor: pointer;
+  }
+
+  .dot {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: transparent;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+  }
+
+  .note {
+    margin-top: 26px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .note b { color: var(--accent); font-weight: 600; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .magnet > * { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Магнітне притягання</h1>
+  <p class="lede">Елемент зміщується до курсора в межах свого радіуса й пружно повертається.</p>
+
+  <div class="stage">
+    <span class="magnet" data-magnetic><button class="btn" type="button">Замовити</button></span>
+    <span class="magnet" data-magnetic data-strength="0.55"><span class="dot">СИЛА .55</span></span>
+  </div>
+
+  <p class="note" id="note">Наведи мишу на елементи.</p>
+</div>
+
+<script>
+  (function () {
+    var note = document.getElementById('note');
+
+    // На дотику ефекту немає, а обробник висить — тому просто не вмикаємо.
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      note.innerHTML = '<b>Вимкнено:</b> дотиковий екран, курсора немає.';
+      return;
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      note.innerHTML = '<b>Вимкнено:</b> користувач попросив менше руху.';
+      return;
+    }
+
+    document.querySelectorAll('[data-magnetic]').forEach(function (wrap) {
+      var child = wrap.firstElementChild;
+      if (!child) return;
+
+      var strength = parseFloat(wrap.dataset.strength || '0.4');
+      var target = { x: 0, y: 0 };
+      var current = { x: 0, y: 0 };
+      var frame = 0;
+
+      function tick() {
+        // Лерп замість пружини з бібліотеки: різниця на око невідчутна,
+        // а залежностей — нуль.
+        current.x += (target.x - current.x) * 0.18;
+        current.y += (target.y - current.y) * 0.18;
+        child.style.transform = 'translate3d(' + current.x.toFixed(2) + 'px,' + current.y.toFixed(2) + 'px,0)';
+
+        if (Math.abs(target.x - current.x) > 0.1 || Math.abs(target.y - current.y) > 0.1) {
+          frame = requestAnimationFrame(tick);
+        } else {
+          frame = 0;
+        }
+      }
+
+      function run() { if (!frame) frame = requestAnimationFrame(tick); }
+
+      wrap.addEventListener('mouseenter', function () { wrap.classList.add('active'); });
+
+      wrap.addEventListener('mousemove', function (event) {
+        var rect = child.getBoundingClientRect();
+        target.x = (event.clientX - (rect.left + rect.width / 2)) * strength;
+        target.y = (event.clientY - (rect.top + rect.height / 2)) * strength;
+        run();
+      });
+
+      wrap.addEventListener('mouseleave', function () {
+        // Повернення віддаємо CSS-транзишну: одна плавна дуга замість
+        // догасання лерпа, яке візуально «прилипає».
+        cancelAnimationFrame(frame);
+        frame = 0;
+        target.x = target.y = 0;
+        current.x = current.y = 0;
+        wrap.classList.remove('active');
+        child.style.transform = 'translate3d(0,0,0)';
+      });
+    });
+  })();
+</script>
+</body>
+</html>

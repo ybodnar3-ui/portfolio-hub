@@ -6,5 +6,37 @@
     "tags": ["access", "video", "paywall"],
     "fromProject": "artpro",
     "deps": []
+  },
+  {
+    "slug": "film-develop",
+    "title": "Знімок, що проявляється",
+    "summary": "Кадр виходить з чорноти за 5.2 с, з лічильником секунд і пачкою на 8 кадрів",
+    "tags": ["animation", "css-filter", "interaction"],
+    "fromProject": "revela-store",
+    "deps": []
+  },
+  {
+    "slug": "desk-height-demo",
+    "title": "Креслення за розміром",
+    "summary": "Повзунок перемальовує SVG: шаблон «параметр → креслення», не лише для столів",
+    "tags": ["svg", "interaction", "configurator"],
+    "fromProject": "altus-store",
+    "deps": []
+  },
+  {
+    "slug": "scroll-reveal",
+    "title": "Поява секцій при скролі",
+    "summary": "IntersectionObserver без бібліотек; контент видимий, навіть якщо JS не спрацював",
+    "tags": ["scroll", "animation"],
+    "fromProject": "aquastar",
+    "deps": []
+  },
+  {
+    "slug": "magnetic-hover",
+    "title": "Магнітне притягання",
+    "summary": "Елемент тягнеться до курсора й пружно повертається; вимкнений на дотику",
+    "tags": ["cursor", "animation", "micro-interaction"],
+    "fromProject": "aquastar",
+    "deps": []
   }
 ]
