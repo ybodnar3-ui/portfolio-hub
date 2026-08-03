@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Hub
 
-## Getting Started
+Один додаток, у якому зібрані всі vibe-coding проєкти. Не три сайти, а **три режими над
+спільним `data/`** — розсинхрону між ними не може бути за побудовою.
 
-First, run the development server:
+Next.js 16 · React 19 · TypeScript · Tailwind 4 · Vitest. Бази даних немає: усі дані —
+статичні JSON у git.
+
+---
+
+## Три режими
+
+| Режим | Шлях | Кому | Що робить |
+|---|---|---|---|
+| **Вітрина** | `/`, `/work/[slug]` | публічно | Посилання, яке можна кинути клієнту. Картка показує статичний постер, на hover підвантажує **живий сайт** в iframe. |
+| **Lab** | `/lab`, `/lab/[slug]` | під паролем | Бібліотека фіч. Кожна — самодостатній HTML: живе демо, код із кнопкою копіювання, нотатки. |
+| **Дошка** | `/board` | під паролем | Канбан на шість колонок, прапорці «зламано» і «застояно», таймер обліку часу і зведення годин. |
+
+---
+
+## Запуск локально
+
+```bash
+npm install
+```
+
+Створити `.env.local` (у git не потрапляє):
+
+```
+LAB_PASSWORD=свій-пароль
+```
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Далі `http://localhost:3000`. Пароль питається один раз на `/lab` і `/board`, cookie живе 30 днів.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Інші команди:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm test          # vitest, чиста логіка: time, status, merge
+npm run build     # продакшн-збірка
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Скрипти
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Команда | Що робить | Коли ганяти |
+|---|---|---|
+| `npm run scan` | Проходить `~/Claude`, знаходить проєкти, читає `package.json`, `.vercel/project.json` і `.planning/HANDOFF.json`. Додає нові картки-чернетки, оновлює `lastTouched`. | Коли зʼявився новий проєкт |
+| `npm run shots` | Playwright знімає `public/shots/<slug>.webp`. Джерело — `liveUrl`, а якщо його немає, локальний HTML через `file://`. | Після `scan` |
+| `npm run health` | Пінгує кожен `liveUrl`, ставить `health: ok \| broken`. | Раз на тиждень або вручну |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Скрипти не затирають рукописне.** `scan.mjs` чіпає тільки `lastTouched` і додає нові
+картки; `health.mjs` — тільки `health`. Описи, теги, статуси й наступні кроки, написані
+руками, недоторканні. Merge також нічого не видаляє: проєкт, який зник з диска, лишається
+в портфоліо.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Чому запис працює тільки локально
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Перетягування карток і таймер пишуть у ті самі JSON через API-роути. Обидва роути
+перевіряють `NODE_ENV` і на продакшні повертають **403**:
+
+- на localhost — дошка редагується, таймер іде, ти комітиш, історія стану й витраченого часу
+  живе в git;
+- на Vercel — дошка read-only, кнопок таймера немає, накопичені години видно.
+
+Це не обмеження, а спосіб обійтись без бази: джерело правди — git, а не сервер.
+
+---
+
+## Як додати новий проєкт
+
+```bash
+npm run scan
+```
+
+Зʼявиться картка-чернетка зі статусом `idea`. Далі руками в `data/projects.json`:
+`title`, `tagline`, `story`, `kind`, `tags`, `status`.
+
+```bash
+npm run shots
+npm run health
+```
+
+Закомітити разом зі знімком. `public/shots/` **не** в `.gitignore` — Vercel збирає з git,
+і без закомічених знімків вітрина на проді була б без постерів.
+
+---
+
+## Як витягти нову фічу
+
+1. Знайти код у проєкті-джерелі.
+2. Зібрати `public/features/<slug>/index.html` — увесь CSS і JS всередині файлу,
+   без збірки, без імпортів, без CDN.
+3. **Критерій готовності жорсткий: файл відкривається подвійним кліком у браузері й працює.**
+   Не працює автономно — не працюватиме і в iframe.
+4. Написати `notes.md`: що робить, як вбудувати, на що звернути увагу.
+5. Додати запис у `data/features.json` і слаг у `featureSlugs` проєкту-джерела.
+
+Сторінка фічі читає той самий `index.html` двічі — віддає в iframe і показує як текст.
+Одне джерело: код у превʼю і код у панелі не можуть розійтися. Дублювати код фічі
+в JSON чи JSX не можна.
+
+---
+
+## Структура
+
+```
+app/          сторінки й API-роути
+components/   UI
+lib/          types, data, time, status, merge, write — уся логіка тут
+data/         projects.json, features.json, time.json
+public/
+  features/   самодостатні демо фіч
+  shots/      постери проєктів (комітяться)
+scripts/      scan, shots, health
+tests/        vitest на чисту логіку
+specs/        технічні завдання
+docs/         журнал роботи й рішення
+```
