@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { TimerHud } from './timer-hud'
 
 const NAV = [
   { href: '/', label: 'Роботи' },
@@ -54,8 +55,9 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        {/* Слот під <TimerHud /> — заповнюється в Задачі 17 */}
-        <div className="hidden min-w-0 justify-end sm:flex sm:basis-40" />
+        <div className="hidden min-w-0 justify-end sm:flex sm:basis-40">
+          <TimerHud />
+        </div>
       </div>
     </header>
   )

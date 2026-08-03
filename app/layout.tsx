@@ -3,6 +3,8 @@ import { Cormorant_Garamond, Manrope } from 'next/font/google'
 import './globals.css'
 import { CustomCursor } from '@/components/custom-cursor'
 import { SiteHeader } from '@/components/site-header'
+import { TimerProvider } from '@/components/timer-provider'
+import { getProjects } from '@/lib/data'
 
 const display = Cormorant_Garamond({
   variable: '--font-display',
@@ -29,15 +31,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const titles = Object.fromEntries(getProjects().map((p) => [p.slug, p.title]))
+
   return (
     <html
       lang="uk"
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <body className="grain flex min-h-full flex-col">
-        <CustomCursor />
-        <SiteHeader />
-        {children}
+        <TimerProvider titles={titles}>
+          <CustomCursor />
+          <SiteHeader />
+          {children}
+        </TimerProvider>
       </body>
     </html>
   )

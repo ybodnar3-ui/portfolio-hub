@@ -1,1 +1,41 @@
-{ "running": null, "entries": [] }
+{
+  "running": null,
+  "entries": [
+    {
+      "id": "e_0001",
+      "projectSlug": "aquastar",
+      "startedAt": "2026-08-03T16:05:16.422Z",
+      "endedAt": "2026-08-03T16:05:21.313Z",
+      "minutes": 0,
+      "note": "",
+      "source": "timer"
+    },
+    {
+      "id": "e_0002",
+      "projectSlug": "medcentar",
+      "startedAt": "2026-08-03T16:05:21.313Z",
+      "endedAt": "2026-08-03T16:05:34.896Z",
+      "minutes": 0,
+      "note": "",
+      "source": "timer"
+    },
+    {
+      "id": "e_0003",
+      "projectSlug": "aquastar",
+      "startedAt": "2026-08-03T08:05:48.366Z",
+      "endedAt": "2026-08-03T16:05:50.861Z",
+      "minutes": 120,
+      "note": "",
+      "source": "manual"
+    },
+    {
+      "id": "e_0004",
+      "projectSlug": "aquastar",
+      "startedAt": "2026-08-02T20:06:13.887Z",
+      "endedAt": "2026-08-03T16:07:05.780Z",
+      "minutes": 95,
+      "note": "",
+      "source": "manual"
+    }
+  ]
+}

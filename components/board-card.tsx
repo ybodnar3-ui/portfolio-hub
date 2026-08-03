@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import type { Project } from '@/lib/types'
 import { formatDuration } from '@/lib/time'
+import { TimerButton } from './timer-button'
 
 export function BoardCard({
   project,
@@ -39,9 +40,16 @@ export function BoardCard({
         </span>
       </div>
 
-      {spent > 0 && (
-        <p className="num mt-2 text-xs tracking-[0.08em] text-muted">{formatDuration(spent)}</p>
-      )}
+      <div className="mt-3 flex items-center justify-between gap-3">
+        <TimerButton
+          projectSlug={project.slug}
+          projectTitle={project.title}
+          editable={editable}
+        />
+        {spent > 0 && (
+          <span className="num text-xs tracking-[0.08em] text-muted">{formatDuration(spent)}</span>
+        )}
+      </div>
 
       {project.nextStep && (
         <p className="mt-3 border-l border-line pl-3 text-[0.8125rem] leading-snug text-muted">
