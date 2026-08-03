@@ -108,7 +108,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       {features.length > 0 && (
         <section className="border-t border-line pt-12">
           <h2 className="eyebrow">Фічі звідси</h2>
-          <ul className="mt-6 divide-y divide-[--border]">
+          <ul className="mt-6 divide-y divide-line">
             {features.map((feature) => (
               <li key={feature.slug}>
                 <Link
