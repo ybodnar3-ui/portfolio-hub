@@ -1,0 +1,398 @@
+[
+  {
+    "slug": "artpro",
+    "title": "ARTPRO",
+    "tagline": "Платформа тренувальних програм",
+    "story": "Готове демо преміум-сайту, зроблене щоб продати його тренеру, який досі торгував програмами через слабкий weblium і Instagram Direct. Модель доступу «замок на відео»: структура програми відкрита всім, відео замкнені до оплати.",
+    "kind": "web",
+    "stack": [
+      "vanilla JS",
+      "Vercel"
+    ],
+    "liveUrl": "https://artpro-one.vercel.app",
+    "localPath": "~/Claude/artpro",
+    "tags": [
+      "landing",
+      "fitness",
+      "demo"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-06-15",
+    "health": "unknown"
+  },
+  {
+    "slug": "altus-store",
+    "title": "ALTUS",
+    "tagline": "Магазин столів із регулюванням висоти",
+    "story": "Завдання TETR «Shopify & Brand Guidelines», виконане без Shopify — власний статичний магазин англійською. Весь сайт генерується з build/data.js, правки в .html затираються наступним білдом. Товари — реальні фото з Pexels.",
+    "kind": "web",
+    "stack": [
+      "vanilla JS",
+      "власний білд",
+      "Vercel"
+    ],
+    "liveUrl": "https://altus-store.vercel.app",
+    "localPath": "~/Claude/altus-store",
+    "tags": [
+      "ecommerce",
+      "TETR"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-22",
+    "health": "unknown"
+  },
+  {
+    "slug": "revela-store",
+    "title": "REVELA",
+    "tagline": "Миттєві та плівкові камери",
+    "story": "Другий комплект того самого завдання TETR, зроблений для однокурсника Алі Хаджіза. Темна тема фотолабораторії, щоб не виглядав перефарбованим ALTUS. Модель «бритва і леза»: камера разова, плівка — витратник за підпискою.",
+    "kind": "web",
+    "stack": [
+      "vanilla JS",
+      "власний білд",
+      "Vercel"
+    ],
+    "liveUrl": "https://revela-store.vercel.app",
+    "localPath": "~/Claude/revela-store",
+    "tags": [
+      "ecommerce",
+      "dark",
+      "TETR"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-22",
+    "health": "unknown"
+  },
+  {
+    "slug": "aquastar",
+    "title": "Аква Стар",
+    "tagline": "Доставка води, Мелітополь",
+    "story": "Сайт-візитка компанії доставки води. Темний кінематографічний стиль, палітра графіт плюс мʼята — світлий «аква-люкс» відхилений як дешевий, синій заборонений. Підводне відео в герої, кошик, заявки в Telegram.",
+    "kind": "web",
+    "stack": [
+      "Next.js 14",
+      "Tailwind",
+      "framer-motion"
+    ],
+    "liveUrl": "https://aquastar-plum.vercel.app",
+    "localPath": "~/Claude/aquastar",
+    "tags": [
+      "landing",
+      "delivery"
+    ],
+    "status": "finishing",
+    "featureSlugs": [],
+    "nextStep": "Проставити TELEGRAM_BOT_TOKEN і CHAT_ID на Vercel",
+    "blocker": "",
+    "lastTouched": "2026-06-30",
+    "health": "unknown"
+  },
+  {
+    "slug": "medcentar",
+    "title": "ATLAS PROTOCOL",
+    "tagline": "Превентивний скринінг для боснійської діаспори",
+    "story": "Переупаковка діючої поліклініки Medical Centar (Сараєво, Травник) у дводенний резидентський протокол: МРТ усього тіла, лабораторія, інтерніст, дентальний скрин і висновок німецькою. Ставка на діаспору в DACH, яку не бачить жоден гравець ринку.",
+    "kind": "web",
+    "stack": [
+      "vanilla HTML"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/medcentar",
+    "tags": [
+      "landing",
+      "medical",
+      "positioning"
+    ],
+    "status": "in-progress",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-29",
+    "health": "unknown"
+  },
+  {
+    "slug": "brownhill-offer",
+    "title": "BrownHill",
+    "tagline": "Комерційна пропозиція «Черга покупців»",
+    "story": "Оффер клієнту з повним циклом і фінмоделлю на три місяці. Розрахунки лежать окремими xlsx поруч із сайтом.",
+    "kind": "web",
+    "stack": [
+      "vanilla HTML",
+      "Vercel"
+    ],
+    "liveUrl": "https://brownhill-offer.vercel.app",
+    "localPath": "~/Claude/brownhill-offer",
+    "tags": [
+      "offer",
+      "client"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-05",
+    "health": "unknown"
+  },
+  {
+    "slug": "linco-offers",
+    "title": "LINCO Автопілот",
+    "tagline": "Серія комерційних пропозицій з автоматизації",
+    "story": "Чотири HTML-документи під різні сегменти й мови: оффер «Автопілот» українською та російською, каталог автоматизацій і окрема версія без прив'язки до 1С.",
+    "kind": "web",
+    "stack": [
+      "vanilla HTML"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/LINCO-Оффер-RU.html",
+    "tags": [
+      "offer",
+      "client",
+      "automation"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-05",
+    "health": "unknown"
+  },
+  {
+    "slug": "agency-crm",
+    "title": "AgencyCRM",
+    "tagline": "Лендінг CRM для агенцій",
+    "story": "Односторінковий сайт продукту — CRM під агентський воркфлоу.",
+    "kind": "web",
+    "stack": [
+      "vanilla HTML"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/crm-agency.html",
+    "tags": [
+      "landing",
+      "b2b",
+      "saas"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-05",
+    "health": "unknown"
+  },
+  {
+    "slug": "ofm-automation",
+    "title": "OFM Automation",
+    "tagline": "AI-автоматизація для OFM-агенцій",
+    "story": "Англомовний лендінг послуги: десять AI-моделей за тридцять днів. Лежить у корені як index.html.",
+    "kind": "web",
+    "stack": [
+      "vanilla HTML"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/index.html",
+    "tags": [
+      "landing",
+      "ai",
+      "b2b"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-05",
+    "health": "unknown"
+  },
+  {
+    "slug": "bodnar-ortho",
+    "title": "Ортодонтія Боднара",
+    "tagline": "Практика Андрія Богдановича, Івано-Франківськ",
+    "story": "Сайт ортодонтичної практики батька — ортодонта з сорокарічним стажем. Той самий кабінет має стати першим клієнтом стартапу OrthoAI.",
+    "kind": "web",
+    "stack": [
+      "vanilla HTML"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/bodnar-landing.html",
+    "tags": [
+      "landing",
+      "medical",
+      "family"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-05",
+    "health": "unknown"
+  },
+  {
+    "slug": "booking-clone",
+    "title": "Booking Clone",
+    "tagline": "Клон інтерфейсу бронювання",
+    "story": "Навчальний клон Booking.com українською — відпрацювання складного пошуку з фільтрами.",
+    "kind": "web",
+    "stack": [
+      "vanilla HTML"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/booking-clone",
+    "tags": [
+      "clone",
+      "practice"
+    ],
+    "status": "archived",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-06-17",
+    "health": "unknown"
+  },
+  {
+    "slug": "shader-app",
+    "title": "Shader App",
+    "tagline": "Пісочниця WebGL-шейдерів",
+    "story": "Експерименти з шейдерами на Three.js із інтерфейсом на shadcn.",
+    "kind": "web",
+    "stack": [
+      "Next.js",
+      "three",
+      "shadcn"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/shader-app",
+    "tags": [
+      "3d",
+      "experiment"
+    ],
+    "status": "archived",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-04-09",
+    "health": "unknown"
+  },
+  {
+    "slug": "spotlight-demo",
+    "title": "Spotlight Demo",
+    "tagline": "Проба Spline у Next.js",
+    "story": "Перевірка інтеграції 3D-сцени Spline у Next.js.",
+    "kind": "web",
+    "stack": [
+      "Next.js",
+      "Spline"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/spotlight-demo",
+    "tags": [
+      "3d",
+      "experiment"
+    ],
+    "status": "archived",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-04-09",
+    "health": "unknown"
+  },
+  {
+    "slug": "altus-pitch",
+    "title": "ALTUS Pitch",
+    "tagline": "Pitch deck на 10 слайдів",
+    "story": "Індивідуальне завдання TETR по ALTUS. Ключова легенда, яку треба тримати в усіх наступних матеріалах: asset-light consignment — стік на балансі постачальника, title переходить у момент продажу.",
+    "kind": "deck",
+    "stack": [
+      "pptxgenjs",
+      "docx"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/altus-pitch",
+    "tags": [
+      "deck",
+      "TETR"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-21",
+    "health": "unknown"
+  },
+  {
+    "slug": "revela-pitch",
+    "title": "REVELA Pitch",
+    "tagline": "Pitch deck, рефлексія і план виступу",
+    "story": "Другий Business Pitch, для Алі. Фінмодель навмисно інша, ніж в ALTUS: гроші не в камері, а в повторних замовленнях плівки.",
+    "kind": "deck",
+    "stack": [
+      "pptxgenjs",
+      "docx"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/revela-pitch",
+    "tags": [
+      "deck",
+      "TETR"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-22",
+    "health": "unknown"
+  },
+  {
+    "slug": "revela-gtm",
+    "title": "REVELA GTM Turnaround",
+    "tagline": "Shark Tank Rescue: 15 слайдів і скрипт відео",
+    "story": "Третє завдання по REVELA. Легенда: чотирнадцять місяців після раунду, камери продались, плівка ні. Рішення — переpositioning у photography membership, не новий продукт.",
+    "kind": "deck",
+    "stack": [
+      "pptxgenjs",
+      "docx"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/revela-gtm",
+    "tags": [
+      "deck",
+      "strategy",
+      "TETR"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-22",
+    "health": "unknown"
+  },
+  {
+    "slug": "tmc-report",
+    "title": "TMC D2C Report",
+    "tagline": "Звіт по реальному бізнесу семестру в Індії",
+    "story": "The Masala Chimney — їжа, три півоти за семестр, нуль виручки. Написано від імені Юри як чесний founder's report без вигаданих KPI. Плюс два суміжні завдання: consumer discovery і CRO-аудит реального сайту.",
+    "kind": "doc",
+    "stack": [
+      "docx"
+    ],
+    "liveUrl": null,
+    "localPath": "~/Claude/tmc-report",
+    "tags": [
+      "report",
+      "TETR"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-25",
+    "health": "unknown"
+  }
+]
