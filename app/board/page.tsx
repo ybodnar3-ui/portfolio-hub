@@ -26,6 +26,10 @@ export default function BoardPage() {
     ]),
   ) as Record<ProjectStatus, BoardItem[]>
 
+  /* На Vercel картки не перетягуються — це очікувана поведінка, а не баг:
+     API-роути запису там повертають 403. */
+  const editable = process.env.NODE_ENV !== 'production'
+
   return (
     <main className="flex min-h-0 flex-1 flex-col pb-12 pt-14">
       <header className="pb-10" style={{ paddingInline: 'var(--gutter)' }}>
@@ -42,7 +46,7 @@ export default function BoardPage() {
             key={column.id}
             column={column}
             items={enriched[column.id]}
-            editable={false}
+            editable={editable}
           />
         ))}
       </div>

@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import type { Project } from '@/lib/types'
 import { formatDuration } from '@/lib/time'
@@ -6,18 +8,27 @@ export function BoardCard({
   project,
   spent,
   stale,
+  editable = false,
 }: {
   project: Project
   spent: number
   stale: boolean
-  /** Вмикається в Задачі 16 разом із перетягуванням. */
   editable?: boolean
 }) {
   return (
     <Link
       href={`/work/${project.slug}`}
       data-cursor="hover"
-      className="group block border border-line bg-surface p-4 transition-colors duration-300 hover:border-line-strong hover:bg-raised"
+      draggable={editable}
+      onDragStart={(event) => {
+        if (!editable) return
+        // Якір за замовчуванням тягне свій href — підміняємо на слаг.
+        event.dataTransfer.setData('text/plain', project.slug)
+        event.dataTransfer.effectAllowed = 'move'
+      }}
+      className={`group block border border-line bg-surface p-4 transition-colors duration-300 hover:border-line-strong hover:bg-raised ${
+        editable ? 'cursor-grab active:cursor-grabbing' : ''
+      }`}
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="font-serif text-xl leading-tight text-ink transition-colors duration-300 group-hover:text-accent">

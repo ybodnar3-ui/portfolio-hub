@@ -1,3 +1,7 @@
+'use client'
+
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import type { Project, ProjectStatus } from '@/lib/types'
 import { BoardCard } from './board-card'
 
@@ -16,14 +20,48 @@ export function BoardColumn({
   items: BoardItem[]
   editable?: boolean
 }) {
+  const router = useRouter()
+  const [over, setOver] = useState(false)
+
+  async function drop(event: React.DragEvent) {
+    event.preventDefault()
+    setOver(false)
+    if (!editable) return
+
+    const slug = event.dataTransfer.getData('text/plain')
+    if (!slug || items.some((i) => i.project.slug === slug)) return
+
+    const response = await fetch('/api/board', {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ slug, status: column.id }),
+    })
+
+    if (response.ok) router.refresh()
+  }
+
   return (
-    <section className="flex w-[19rem] shrink-0 flex-col">
+    <section
+      className="flex w-[19rem] shrink-0 flex-col"
+      onDragOver={(event) => {
+        if (!editable) return
+        event.preventDefault()
+        event.dataTransfer.dropEffect = 'move'
+        setOver(true)
+      }}
+      onDragLeave={() => setOver(false)}
+      onDrop={drop}
+    >
       <header className="flex items-baseline justify-between gap-3 border-b border-line pb-3">
-        <h2 className="text-[0.8125rem] tracking-[0.12em] text-ink uppercase">{column.label}</h2>
+        <h2 className="text-[0.8125rem] uppercase tracking-[0.12em] text-ink">{column.label}</h2>
         <span className="num text-xs text-faint">{items.length}</span>
       </header>
 
-      <div className="mt-4 flex flex-col gap-3">
+      <div
+        className={`mt-4 flex flex-1 flex-col gap-3 transition-colors duration-200 ${
+          over ? 'bg-accent/5 outline outline-1 outline-accent/40' : ''
+        }`}
+      >
         {items.length === 0 ? (
           // Порожня колонка не зникає — інакше дошка стрибає при кожному переносі.
           <p className="border border-dashed border-line px-4 py-8 text-center text-xs text-faint">
