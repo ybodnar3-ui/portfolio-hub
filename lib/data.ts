@@ -27,3 +27,12 @@ export function getFeature(slug: string): Feature | undefined {
 export function getTimeData(): TimeData {
   return read<TimeData>('time.json')
 }
+
+/**
+ * Знімок є не в кожного проєкту: deck і doc не знімаються взагалі,
+ * а вебпроєкт міг не знятись через помилку. Перевіряємо на сервері,
+ * щоб на вітрині не було битих картинок.
+ */
+export function hasShot(slug: string): boolean {
+  return fs.existsSync(path.join(process.cwd(), 'public', 'shots', `${slug}.webp`))
+}

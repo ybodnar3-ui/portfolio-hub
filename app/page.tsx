@@ -1,5 +1,6 @@
 import { getProjects } from '@/lib/data'
 import { visibleOnShowcase } from '@/lib/status'
+import { ProjectCard } from '@/components/project-card'
 
 export default function Home() {
   const projects = visibleOnShowcase(getProjects())
@@ -33,6 +34,20 @@ export default function Home() {
             </span>
           </p>
         </div>
+      </section>
+
+      <section className="grid gap-x-10 gap-y-20 py-20 md:grid-cols-2 md:gap-y-28">
+        {projects.map((project, i) => (
+          <div
+            key={project.slug}
+            className="reveal-on-scroll"
+            /* Кожна друга картка опускається нижче — сітка перестає читатись
+               як таблиця й починає читатись як розворот. */
+            style={i % 2 === 1 ? { marginTop: 'clamp(0px, 6vw, 5rem)' } : undefined}
+          >
+            <ProjectCard project={project} />
+          </div>
+        ))}
       </section>
     </main>
   )
