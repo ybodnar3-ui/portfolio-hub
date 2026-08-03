@@ -1,10 +1,12 @@
 [
   {
     "slug": "artpro",
+    "repo": "artpro",
     "title": "ARTPRO",
     "tagline": "Платформа тренувальних програм",
     "story": "Готове демо преміум-сайту, зроблене щоб продати його тренеру, який досі торгував програмами через слабкий weblium і Instagram Direct. Модель доступу «замок на відео»: структура програми відкрита всім, відео замкнені до оплати.",
     "kind": "web",
+    "origin": "product",
     "stack": [
       "vanilla JS",
       "Vercel"
@@ -27,10 +29,12 @@
   },
   {
     "slug": "altus-store",
+    "repo": "altus-store",
     "title": "ALTUS",
     "tagline": "Магазин столів із регулюванням висоти",
     "story": "Завдання TETR «Shopify & Brand Guidelines», виконане без Shopify — власний статичний магазин англійською. Весь сайт генерується з build/data.js, правки в .html затираються наступним білдом. Товари — реальні фото з Pexels.",
     "kind": "web",
+    "origin": "study",
     "stack": [
       "vanilla JS",
       "власний білд",
@@ -53,10 +57,12 @@
   },
   {
     "slug": "revela-store",
+    "repo": "revela-store",
     "title": "REVELA",
     "tagline": "Миттєві та плівкові камери",
     "story": "Другий комплект того самого завдання TETR, зроблений для однокурсника Алі Хаджіза. Темна тема фотолабораторії, щоб не виглядав перефарбованим ALTUS. Модель «бритва і леза»: камера разова, плівка — витратник за підпискою.",
     "kind": "web",
+    "origin": "study",
     "stack": [
       "vanilla JS",
       "власний білд",
@@ -80,10 +86,12 @@
   },
   {
     "slug": "aquastar",
+    "repo": "aquastar",
     "title": "Аква Стар",
     "tagline": "Доставка води, Мелітополь",
     "story": "Сайт-візитка компанії доставки води. Темний кінематографічний стиль, палітра графіт плюс мʼята — світлий «аква-люкс» відхилений як дешевий, синій заборонений. Підводне відео в герої, кошик, заявки в Telegram.",
     "kind": "web",
+    "origin": "client",
     "stack": [
       "Next.js 14",
       "Tailwind",
@@ -107,10 +115,12 @@
   },
   {
     "slug": "medcentar",
+    "repo": "medcentar",
     "title": "ATLAS PROTOCOL",
     "tagline": "Превентивний скринінг для боснійської діаспори",
     "story": "Переупаковка діючої поліклініки Medical Centar (Сараєво, Травник) у дводенний резидентський протокол: МРТ усього тіла, лабораторія, інтерніст, дентальний скрин і висновок німецькою. Ставка на діаспору в DACH, яку не бачить жоден гравець ринку.",
     "kind": "web",
+    "origin": "client",
     "stack": [
       "vanilla HTML"
     ],
@@ -130,10 +140,12 @@
   },
   {
     "slug": "brownhill-offer",
+    "repo": "brownhill-offer",
     "title": "BrownHill",
     "tagline": "Комерційна пропозиція «Черга покупців»",
     "story": "Оффер клієнту з повним циклом і фінмоделлю на три місяці. Розрахунки лежать окремими xlsx поруч із сайтом.",
     "kind": "web",
+    "origin": "client",
     "stack": [
       "vanilla HTML",
       "Vercel"
@@ -153,10 +165,12 @@
   },
   {
     "slug": "linco-offers",
+    "repo": null,
     "title": "LINCO Автопілот",
     "tagline": "Серія комерційних пропозицій з автоматизації",
     "story": "Чотири HTML-документи під різні сегменти й мови: оффер «Автопілот» українською та російською, каталог автоматизацій і окрема версія без прив'язки до 1С.",
     "kind": "web",
+    "origin": "client",
     "stack": [
       "vanilla HTML"
     ],
@@ -176,10 +190,12 @@
   },
   {
     "slug": "agency-crm",
+    "repo": null,
     "title": "AgencyCRM",
     "tagline": "Лендінг CRM для агенцій",
     "story": "Односторінковий сайт продукту — CRM під агентський воркфлоу.",
     "kind": "web",
+    "origin": "product",
     "stack": [
       "vanilla HTML"
     ],
@@ -199,10 +215,12 @@
   },
   {
     "slug": "ofm-automation",
+    "repo": null,
     "title": "OFM Automation",
     "tagline": "AI-автоматизація для OFM-агенцій",
     "story": "Англомовний лендінг послуги: десять AI-моделей за тридцять днів. Лежить у корені як index.html.",
     "kind": "web",
+    "origin": "product",
     "stack": [
       "vanilla HTML"
     ],
@@ -222,10 +240,12 @@
   },
   {
     "slug": "bodnar-ortho",
+    "repo": null,
     "title": "Ортодонтія Боднара",
     "tagline": "Практика Андрія Богдановича, Івано-Франківськ",
     "story": "Сайт ортодонтичної практики батька — ортодонта з сорокарічним стажем. Той самий кабінет має стати першим клієнтом стартапу OrthoAI.",
     "kind": "web",
+    "origin": "client",
     "stack": [
       "vanilla HTML"
     ],
@@ -245,10 +265,12 @@
   },
   {
     "slug": "booking-clone",
+    "repo": "booking-clone",
     "title": "Booking Clone",
     "tagline": "Клон інтерфейсу бронювання",
     "story": "Навчальний клон Booking.com українською — відпрацювання складного пошуку з фільтрами.",
     "kind": "web",
+    "origin": "practice",
     "stack": [
       "vanilla HTML"
     ],
@@ -267,10 +289,12 @@
   },
   {
     "slug": "shader-app",
+    "repo": "shader-app",
     "title": "Shader App",
     "tagline": "Пісочниця WebGL-шейдерів",
     "story": "Експерименти з шейдерами на Three.js із інтерфейсом на shadcn.",
     "kind": "web",
+    "origin": "practice",
     "stack": [
       "Next.js",
       "three",
@@ -286,15 +310,17 @@
     "featureSlugs": [],
     "nextStep": "",
     "blocker": "",
-    "lastTouched": "2026-04-09",
+    "lastTouched": "2026-04-02",
     "health": "unknown"
   },
   {
     "slug": "spotlight-demo",
+    "repo": "spotlight-demo",
     "title": "Spotlight Demo",
     "tagline": "Проба Spline у Next.js",
     "story": "Перевірка інтеграції 3D-сцени Spline у Next.js.",
     "kind": "web",
+    "origin": "practice",
     "stack": [
       "Next.js",
       "Spline"
@@ -309,15 +335,17 @@
     "featureSlugs": [],
     "nextStep": "",
     "blocker": "",
-    "lastTouched": "2026-04-09",
+    "lastTouched": "2026-04-02",
     "health": "unknown"
   },
   {
     "slug": "altus-pitch",
+    "repo": "altus-pitch",
     "title": "ALTUS Pitch",
     "tagline": "Pitch deck на 10 слайдів",
     "story": "Індивідуальне завдання TETR по ALTUS. Ключова легенда, яку треба тримати в усіх наступних матеріалах: asset-light consignment — стік на балансі постачальника, title переходить у момент продажу.",
     "kind": "deck",
+    "origin": "study",
     "stack": [
       "pptxgenjs",
       "docx"
@@ -337,10 +365,12 @@
   },
   {
     "slug": "revela-pitch",
+    "repo": "revela-pitch",
     "title": "REVELA Pitch",
     "tagline": "Pitch deck, рефлексія і план виступу",
     "story": "Другий Business Pitch, для Алі. Фінмодель навмисно інша, ніж в ALTUS: гроші не в камері, а в повторних замовленнях плівки.",
     "kind": "deck",
+    "origin": "study",
     "stack": [
       "pptxgenjs",
       "docx"
@@ -360,10 +390,12 @@
   },
   {
     "slug": "revela-gtm",
+    "repo": "revela-gtm",
     "title": "REVELA GTM Turnaround",
     "tagline": "Shark Tank Rescue: 15 слайдів і скрипт відео",
     "story": "Третє завдання по REVELA. Легенда: чотирнадцять місяців після раунду, камери продались, плівка ні. Рішення — переpositioning у photography membership, не новий продукт.",
     "kind": "deck",
+    "origin": "study",
     "stack": [
       "pptxgenjs",
       "docx"
@@ -384,10 +416,12 @@
   },
   {
     "slug": "tmc-report",
+    "repo": "tmc-report",
     "title": "TMC D2C Report",
     "tagline": "Звіт по реальному бізнесу семестру в Індії",
     "story": "The Masala Chimney — їжа, три півоти за семестр, нуль виручки. Написано від імені Юри як чесний founder's report без вигаданих KPI. Плюс два суміжні завдання: consumer discovery і CRO-аудит реального сайту.",
     "kind": "doc",
+    "origin": "study",
     "stack": [
       "docx"
     ],
@@ -402,6 +436,522 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-25",
+    "health": "unknown"
+  },
+  {
+    "slug": "linkedin-outreach-mvp",
+    "repo": "ali-linkedin-project-public",
+    "title": "LinkedIn-аутріч, перша версія",
+    "tagline": "Ранній прототип під замовника",
+    "story": "Перший підхід до автоматизації LinkedIn під замовника. Пізніше переріс у повноцінний self-hosted продукт — «LinkedIn Outreach Automation».",
+    "kind": "tool",
+    "origin": "client",
+    "stack": [],
+    "liveUrl": null,
+    "localPath": "~/Ali-linkedin-project-public/ali-linkedin-project-public",
+    "tags": [
+      "automation",
+      "outreach"
+    ],
+    "status": "archived",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-04-14",
+    "health": "unknown"
+  },
+  {
+    "slug": "agency-site-draft",
+    "repo": "agency-website",
+    "title": "Сайт агенції — рання версія",
+    "tagline": "Ітерація до узгодженого варіанта",
+    "story": "Попередня збірка сайту агенції. Лишається як історія, актуальна версія — «Сайт агенції».",
+    "kind": "web",
+    "origin": "practice",
+    "stack": [
+      "@react-three/drei",
+      "@react-three/fiber",
+      "@react-three/postprocessing",
+      "@splinetool/react-spline",
+      "@splinetool/runtime",
+      "clsx"
+    ],
+    "liveUrl": null,
+    "localPath": "~/agency-website",
+    "tags": [
+      "3d",
+      "agency"
+    ],
+    "status": "archived",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-28",
+    "health": "unknown"
+  },
+  {
+    "slug": "agency-site",
+    "repo": "agency-website-approved",
+    "title": "Сайт агенції",
+    "tagline": "WebGPU-герой, 3D-сцена і плавний скрол",
+    "story": "Сайт власної агенції. Герой на WebGPU винесений в ізольований Vite-застосунок і вбудований через iframe — так важкий ефект не тягне за собою решту сторінки. React Three Fiber, Spline, GSAP, Lenis.",
+    "kind": "web",
+    "origin": "product",
+    "stack": [
+      "@react-three/drei",
+      "@react-three/fiber",
+      "@react-three/postprocessing",
+      "@splinetool/react-spline",
+      "@splinetool/runtime",
+      "clsx"
+    ],
+    "liveUrl": null,
+    "localPath": "~/agency-website-approved",
+    "tags": [
+      "3d",
+      "agency",
+      "webgpu"
+    ],
+    "status": "finishing",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-28",
+    "health": "unknown"
+  },
+  {
+    "slug": "willhaben-monitor",
+    "repo": "anton-willhaben-scraper",
+    "title": "Willhaben Monitor",
+    "tagline": "Нові оголошення з фільтрами — одразу в Telegram",
+    "story": "Моніторить австрійську дошку оголошень за заданими фільтрами й надсилає нові позиції в Telegram. Памʼятає вже показане в локальній базі, щоб не дублювати. Requests, BeautifulSoup, планувальник.",
+    "kind": "tool",
+    "origin": "client",
+    "stack": [
+      "requests",
+      "beautifulsoup4",
+      "python-dotenv",
+      "python-telegram-bot",
+      "apscheduler",
+      "pydantic"
+    ],
+    "liveUrl": null,
+    "localPath": "~/anton-willhaben-scraper/anton-willhaben-scraper",
+    "tags": [
+      "scraper",
+      "monitoring",
+      "telegram"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-04-16",
+    "health": "unknown"
+  },
+  {
+    "slug": "water-delivery-ops",
+    "repo": "aquafresh-automation",
+    "title": "Аква Стар — операційна PWA",
+    "tagline": "Автоматизація доставки води: замовлення, маршрути, облік",
+    "story": "Друга частина роботи з Аква Стар: якщо лендінг приводить заявку, то ця система її веде. PWA для операційки доставки води — замовлення, клієнти, облік. Зібрана й покрита e2e-тестами, стан pre-go-live.",
+    "kind": "app",
+    "origin": "client",
+    "stack": [],
+    "liveUrl": "https://aquastar-web.vercel.app",
+    "localPath": "~/aquafresh-automation/aquafresh-automation",
+    "tags": [
+      "pwa",
+      "delivery",
+      "operations"
+    ],
+    "status": "finishing",
+    "featureSlugs": [],
+    "nextStep": "Довести до go-live",
+    "blocker": "",
+    "lastTouched": "2026-06-29",
+    "health": "broken"
+  },
+  {
+    "slug": "ai-outreach-site",
+    "repo": "automated-ai-outeach",
+    "title": "AI Outreach — сайт послуги",
+    "tagline": "Лендінг послуги з демо CRM і сценаріями розсилок",
+    "story": "Сайт послуги AI-аутрічу: крім самого лендінга, всередині демо CRM, сценарії розсилок і гілка під WhatsApp. Анімації на GSAP, Anime.js і Locomotive Scroll.",
+    "kind": "web",
+    "origin": "product",
+    "stack": [],
+    "liveUrl": null,
+    "localPath": "~/automated-ai-outeach",
+    "tags": [
+      "landing",
+      "ai",
+      "outreach"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-06-17",
+    "health": "unknown"
+  },
+  {
+    "slug": "bestsecret-monitor",
+    "repo": "best_secret_scraping",
+    "title": "BestSecret Monitor",
+    "tagline": "Стежить за закритим аутлетом і шле, коли зʼявилось потрібне",
+    "story": "Логіниться в закритий аутлет, обходить його за заданими фільтрами й сповіщає, коли зʼявляється потрібна позиція. Playwright зі stealth-режимом проти детекту, планувальник, стан між запусками, Docker і деплой у Railway.",
+    "kind": "tool",
+    "origin": "product",
+    "stack": [
+      "playwright",
+      "playwright-stealth",
+      "python-dotenv",
+      "httpx",
+      "apscheduler"
+    ],
+    "liveUrl": null,
+    "localPath": "~/best_secret_scraper/best_secret_scraping",
+    "tags": [
+      "scraper",
+      "monitoring",
+      "playwright"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-05-11",
+    "health": "unknown"
+  },
+  {
+    "slug": "relations-crm",
+    "repo": "emmanuil-project",
+    "title": "Relations CRM",
+    "tagline": "CRM стосунків з AI-брифом перед зустріччю",
+    "story": "Особиста CRM для людей, а не для угод: «портфоліо знайомих». Зберігає, що ти знаєш про кожного, готує бриф перед зустріччю і нагадує не зникати надовго. Next.js, Prisma на Postgres, Supabase, Claude, пуші через web-push, інтерфейс двома мовами.",
+    "kind": "app",
+    "origin": "client",
+    "stack": [
+      "@anthropic-ai/sdk",
+      "@base-ui/react",
+      "@prisma/adapter-pg",
+      "@prisma/client",
+      "@supabase/ssr",
+      "@supabase/supabase-js"
+    ],
+    "liveUrl": "https://emmanuil-project.vercel.app",
+    "localPath": "~/emmanuil-project",
+    "tags": [
+      "crm",
+      "ai",
+      "saas"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-01",
+    "health": "ok"
+  },
+  {
+    "slug": "inventory-sync",
+    "repo": "ilker-autohandler",
+    "title": "Синхронізація складу з дошкою оголошень",
+    "tagline": "Пайплайн: склад автодилера → оголошення",
+    "story": "Дослідження й проєкт пайплайна, який тримає оголошення автодилера в актуальному стані за складом. Розібрано структуру даних майданчика, зафіксовано зліпок складу, написано план синхронізації. Поки що спека й дослідження, не робочий код.",
+    "kind": "tool",
+    "origin": "client",
+    "stack": [],
+    "liveUrl": null,
+    "localPath": "~/ilker-autohandler",
+    "tags": [
+      "automation",
+      "sync",
+      "research"
+    ],
+    "status": "in-progress",
+    "featureSlugs": [],
+    "nextStep": "Реалізувати пайплайн за планом sync-pipeline",
+    "blocker": "",
+    "lastTouched": "2026-07-24",
+    "health": "unknown"
+  },
+  {
+    "slug": "instagram-sales-bot",
+    "repo": "instagram-automated-sales",
+    "title": "Instagram AI Sales Bot",
+    "tagline": "Продажі в директі на Claude, з анти-баном і дашбордом",
+    "story": "Бот веде продажі в Instagram Direct: відповідає з людськими затримками через Claude, тримає розмову у воронці (новий → в роботі → сконвертований) і не видає, що він бот. Захист акаунта — прогрів, випадкові паузи й автостоп на помилках. Зверху React-дашборд, щоб бачити розмови й на ходу ставити на паузу.",
+    "kind": "tool",
+    "origin": "product",
+    "stack": [],
+    "liveUrl": null,
+    "localPath": "~/instagram-automated-sales/instagram-automated-sales",
+    "tags": [
+      "automation",
+      "ai",
+      "sales"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-05-21",
+    "health": "unknown"
+  },
+  {
+    "slug": "linkedin-outreach",
+    "repo": "linkedin-outreach-automation",
+    "title": "LinkedIn Outreach Automation",
+    "tagline": "Self-hosted аутріч на Playwright з A/B і Smart Inbox",
+    "story": "Найбільша з автоматизацій. Керує кампаніями в LinkedIn через Playwright: A/B-тести повідомлень, Smart Inbox, кілька акаунтів одночасно, умовні гілки сценарію, пошук email, AI-айсбрейкер і динамічний скоринг «здоров’я» акаунта, щоб його не забанили. Бекенд, фронт, розширення для браузера, Docker, деплой у Railway одним кліком.",
+    "kind": "tool",
+    "origin": "product",
+    "stack": [],
+    "liveUrl": null,
+    "localPath": "~/linkedin-outreach-automation/linkedin-outreach-automation",
+    "tags": [
+      "automation",
+      "outreach",
+      "playwright"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-06-24",
+    "health": "unknown"
+  },
+  {
+    "slug": "automation-diagnostic",
+    "repo": "michael-project",
+    "title": "AI-діагностика автоматизації",
+    "tagline": "Бізнес говорить з AI і отримує звіт, що можна автоматизувати",
+    "story": "Вебзастосунок-воронка. Власник бізнесу проходить розмову з AI, на виході — персональний звіт «що у вас можна автоматизувати», а лід із контекстом прилітає замовнику. Next.js, Neon Postgres, Claude.",
+    "kind": "app",
+    "origin": "client",
+    "stack": [
+      "@anthropic-ai/sdk",
+      "@neondatabase/serverless",
+      "next",
+      "react",
+      "react-dom"
+    ],
+    "liveUrl": "https://michael-project.vercel.app",
+    "localPath": "~/michael-project",
+    "tags": [
+      "ai",
+      "lead-gen",
+      "b2b"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-06-23",
+    "health": "ok"
+  },
+  {
+    "slug": "marketplace-reply-bot",
+    "repo": "my-n1-project",
+    "title": "Бот автовідповідей",
+    "tagline": "Логіниться, читає вхідні й відповідає через AI",
+    "story": "Бот заходить в акаунт через Playwright, опитує вхідні повідомлення й відповідає на них моделлю. Розділений на модулі: авторизація, опитування, логіка відповіді. Логи з ротацією, режим із видимим вікном для налагодження.",
+    "kind": "tool",
+    "origin": "product",
+    "stack": [
+      "playwright",
+      "python-dotenv",
+      "loguru",
+      "requests",
+      "openai"
+    ],
+    "liveUrl": null,
+    "localPath": "~/my-n1-project/my-n1-project",
+    "tags": [
+      "automation",
+      "ai",
+      "playwright"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-04-10",
+    "health": "unknown"
+  },
+  {
+    "slug": "offer-machine",
+    "repo": "project-artem",
+    "title": "Offer Machine",
+    "tagline": "Генератор комерційних пропозицій зі стрімінгом",
+    "story": "Машина офферів: з коротких вхідних даних збирає готову комерційну пропозицію й віддає її стрімом у браузер. Next.js, Neon Postgres, Claude, SSE, пресети й шаблони, рейт-ліміт і валідація на zod. Побудовано пофазно за власною спекою — кожна фаза окремий коміт.",
+    "kind": "app",
+    "origin": "client",
+    "stack": [
+      "@anthropic-ai/sdk",
+      "@neondatabase/serverless",
+      "nanoid",
+      "next",
+      "react",
+      "react-dom"
+    ],
+    "liveUrl": null,
+    "localPath": "~/project-artem/project-artem",
+    "tags": [
+      "ai",
+      "sales",
+      "generator"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-27",
+    "health": "unknown"
+  },
+  {
+    "slug": "restaurant-menu-pwa",
+    "repo": "restaurant-pwa",
+    "title": "Відео-меню для ресторанів",
+    "tagline": "Мультитенантна платформа меню й замовлень",
+    "story": "PWA, де гість бачить страву на відео, а не на фото з інтернету, і замовляє з телефона. Мультитенантна: один інстанс тримає багато закладів. Supabase з Drizzle, відео в S3, QR-коди на столи, генерація PDF-меню, віртуалізовані списки, blurhash на прев’ю, Sentry, дві мови.",
+    "kind": "app",
+    "origin": "client",
+    "stack": [
+      "@aws-sdk/client-s3",
+      "@aws-sdk/s3-request-presigner",
+      "@pdf-lib/fontkit",
+      "@sentry/nextjs",
+      "@supabase/ssr",
+      "@supabase/supabase-js"
+    ],
+    "liveUrl": "https://restaurant-pwa.vercel.app",
+    "localPath": "~/restaurant-pwa /restaurant-pwa",
+    "tags": [
+      "pwa",
+      "restaurant",
+      "multitenant"
+    ],
+    "status": "in-progress",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-08-03",
+    "health": "ok"
+  },
+  {
+    "slug": "sidequest",
+    "repo": "sidequest-project",
+    "title": "SideQuest",
+    "tagline": "Щоранку — один персональний квест на 5–15 хвилин",
+    "story": "«Майстер гри життя»: щодня один сайд-квест, адаптований під твоє місто, погоду й настрій. Виконав — відмітив — стрік росте. Мінімум тиску, максимум «о, прикольно, я сьогодні зробив щось нове». Next.js, Supabase, Claude, web-push.",
+    "kind": "app",
+    "origin": "product",
+    "stack": [
+      "@anthropic-ai/sdk",
+      "@supabase/ssr",
+      "@supabase/supabase-js",
+      "canvas-confetti",
+      "next",
+      "react"
+    ],
+    "liveUrl": "https://sidequest-project.vercel.app",
+    "localPath": "~/sidequest-project",
+    "tags": [
+      "ai",
+      "habits",
+      "pwa"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-06-17",
+    "health": "ok"
+  },
+  {
+    "slug": "lost-dog-monitor",
+    "repo": "Tato-poshuk-sobak",
+    "title": "Пошук зниклих собак",
+    "tagline": "Стежить за Telegram, Facebook та Instagram і сповіщає про збіги",
+    "story": "Особистий проєкт: моніторить оголошення про знайдених і зниклих собак одразу в кількох мережах — Telegram, Facebook, Instagram — і шле сповіщення, коли трапляється схоже. Telethon, aiogram, instagrapi, парсинг сторінок, локальна база вже переглянутого.",
+    "kind": "tool",
+    "origin": "product",
+    "stack": [
+      "httpx",
+      "beautifulsoup4",
+      "lxml",
+      "telethon",
+      "aiogram",
+      "apscheduler"
+    ],
+    "liveUrl": null,
+    "localPath": "~/tato-poshuk-sobak/Tato-poshuk-sobak",
+    "tags": [
+      "scraper",
+      "monitoring",
+      "personal"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-04-19",
+    "health": "unknown"
+  },
+  {
+    "slug": "telegram-outreach",
+    "repo": "telegram-outreach-bot",
+    "title": "Telegram Outreach",
+    "tagline": "Пошук груп, парсинг учасників, розсилка з кількох акаунтів",
+    "story": "Знаходить тематичні групи, витягує з них учасників, чистить у список лідів і розсилає повідомлення з кількох акаунтів по черзі. Telethon, експорт лідів у CSV.",
+    "kind": "tool",
+    "origin": "product",
+    "stack": [
+      "telethon",
+      "python-dotenv"
+    ],
+    "liveUrl": null,
+    "localPath": "~/telegram-outreach-bot/telegram-outreach-bot",
+    "tags": [
+      "automation",
+      "telegram",
+      "leads"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-07-10",
+    "health": "unknown"
+  },
+  {
+    "slug": "telegram-lead-monitor",
+    "repo": "tg-chats-lead-scraper",
+    "title": "Telegram Lead Monitor",
+    "tagline": "Юзербот ловить у групах тих, хто шукає обмін крипти",
+    "story": "Userbot на Telethon (MTProto) слухає задані Telegram-групи в реальному часі й піднімає алерт, щойно хтось шукає обмін USDT, BTC чи ETH на готівку. Тобто лід приходить у момент, коли людина ще шукає, а не через день.",
+    "kind": "tool",
+    "origin": "product",
+    "stack": [
+      "Telethon",
+      "python-dotenv",
+      "pytz"
+    ],
+    "liveUrl": null,
+    "localPath": "~/tg-chats-lead-scraper/tg-chats-lead-scraper",
+    "tags": [
+      "scraper",
+      "telegram",
+      "crypto"
+    ],
+    "status": "done",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-05-12",
     "health": "unknown"
   }
 ]

@@ -3,8 +3,9 @@ import { mergeProjects } from '@/lib/merge.mjs'
 import type { Project } from '@/lib/types'
 
 const existing: Project = {
-  slug: 'aquastar', title: 'Аквастар', tagline: 'Лендінг доставки води',
-  story: 'Написано людиною', kind: 'web', stack: ['Next.js'],
+  slug: 'aquastar', repo: 'aquastar', title: 'Аквастар',
+  tagline: 'Лендінг доставки води',
+  story: 'Написано людиною', kind: 'web', origin: 'client', stack: ['Next.js'],
   liveUrl: null, localPath: '~/Claude/aquastar', tags: ['landing'],
   status: 'finishing', featureSlugs: [], nextStep: 'Дожати форму',
   blocker: '', lastTouched: '2026-06-30', health: 'unknown',
@@ -42,5 +43,21 @@ describe('mergeProjects', () => {
   it('не видаляє проєкти, яких більше немає на диску', () => {
     const result = mergeProjects([existing], [])
     expect(result).toHaveLength(1)
+  })
+
+  it('впізнає проєкт за repo, навіть якщо слаг знеособлений', () => {
+    const renamed: Project = { ...existing, slug: 'water-delivery', repo: 'aquastar' }
+    const result = mergeProjects([renamed], [
+      { slug: 'aquastar', repo: 'aquastar', lastTouched: '2026-08-01' },
+    ])
+    expect(result).toHaveLength(1)
+    expect(result[0].slug).toBe('water-delivery')
+    expect(result[0].lastTouched).toBe('2026-08-01')
+  })
+
+  it('нова картка запамʼятовує, з якої папки прийшла', () => {
+    const result = mergeProjects([], [{ slug: 'some-repo', repo: 'some-repo' }])
+    expect(result[0].repo).toBe('some-repo')
+    expect(result[0].origin).toBe('practice')
   })
 })

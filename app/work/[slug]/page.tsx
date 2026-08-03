@@ -2,12 +2,11 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getProject, getProjects, getFeatures, getTimeData, hasShot } from '@/lib/data'
 import { totalMinutes, formatDuration } from '@/lib/time'
+import { KIND_LABEL, ORIGIN_LABEL } from '@/lib/labels'
 
 export function generateStaticParams() {
   return getProjects().map((p) => ({ slug: p.slug }))
 }
-
-const KIND_LABEL = { web: 'Сайт', deck: 'Презентація', doc: 'Документ' } as const
 
 /* Без року в Intl: uk-UA дописує « р.», що в верхньому регістрі читається як «Р.». */
 const DAY_MONTH = new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'long', timeZone: 'UTC' })
@@ -40,7 +39,8 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
 
       <header className="reveal border-b border-line pb-14 pt-16">
         <p className="eyebrow">
-          {KIND_LABEL[project.kind]} · {formatDate(project.lastTouched)}
+          {KIND_LABEL[project.kind]} · {ORIGIN_LABEL[project.origin]} ·{' '}
+          {formatDate(project.lastTouched)}
         </p>
         <h1 className="mt-5 text-[clamp(2.5rem,8vw,6.5rem)]">{project.title}</h1>
         <p className="mt-4 max-w-[40ch] font-serif text-2xl italic text-muted">

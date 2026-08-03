@@ -1,4 +1,7 @@
-import type { Project, ProjectStatus } from './types'
+import type { Project, ProjectOrigin, ProjectStatus } from './types'
+
+/** Вітрина — про роботу, а не про навчання. Решта лишається на дошці. */
+export const SHOWCASE_ORIGINS: ProjectOrigin[] = ['client', 'product']
 
 export const BOARD_COLUMNS: { id: ProjectStatus; label: string }[] = [
   { id: 'idea', label: 'Ідея' },
@@ -20,7 +23,7 @@ export function isStale(project: Project, now: Date): boolean {
 
 export function visibleOnShowcase(projects: Project[]): Project[] {
   return projects
-    .filter((p) => p.status !== 'archived')
+    .filter((p) => p.status !== 'archived' && SHOWCASE_ORIGINS.includes(p.origin))
     .sort((a, b) => b.lastTouched.localeCompare(a.lastTouched))
 }
 

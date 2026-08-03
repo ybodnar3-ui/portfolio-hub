@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { hasShot } from '@/lib/data'
 import type { Project } from '@/lib/types'
+import { KIND_LABEL, ORIGIN_LABEL } from '@/lib/labels'
 import { LivePreview } from './live-preview'
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -17,6 +18,13 @@ export function ProjectCard({ project }: { project: Project }) {
         <h2 className="font-serif text-3xl leading-none text-ink">{project.title}</h2>
         <span className="num shrink-0 text-xs tracking-[0.18em] text-faint">{year}</span>
       </div>
+
+      <p className="mt-2 text-[0.6875rem] uppercase tracking-[0.14em] text-faint">
+        {KIND_LABEL[project.kind]}
+        {project.origin === 'client' && (
+          <span className="text-accent"> · {ORIGIN_LABEL.client}</span>
+        )}
+      </p>
 
       <p className="mt-2 max-w-[46ch] text-sm leading-relaxed text-muted">{project.tagline}</p>
 

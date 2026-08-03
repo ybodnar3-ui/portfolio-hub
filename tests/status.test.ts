@@ -3,8 +3,8 @@ import { BOARD_COLUMNS, isStale, visibleOnShowcase, groupByColumn } from '@/lib/
 import type { Project } from '@/lib/types'
 
 const base: Project = {
-  slug: 'x', title: 'X', tagline: '', story: '', kind: 'web', stack: [],
-  liveUrl: null, localPath: '', tags: [], status: 'in-progress',
+  slug: 'x', repo: 'x', title: 'X', tagline: '', story: '', kind: 'web', origin: 'client',
+  stack: [], liveUrl: null, localPath: '', tags: [], status: 'in-progress',
   featureSlugs: [], nextStep: '', blocker: '', lastTouched: '2026-01-01',
   health: 'unknown',
 }
@@ -48,6 +48,23 @@ describe('visibleOnShowcase', () => {
       { ...base, slug: 'b', status: 'archived' },
     ])
     expect(result.map((p) => p.slug)).toEqual(['a'])
+  })
+
+  it('лишає клієнтську роботу і власні продукти', () => {
+    const result = visibleOnShowcase([
+      { ...base, slug: 'client', origin: 'client' },
+      { ...base, slug: 'product', origin: 'product' },
+    ])
+    expect(result.map((p) => p.slug).sort()).toEqual(['client', 'product'])
+  })
+
+  it('прибирає навчальне й практику — вітрина не про це', () => {
+    const result = visibleOnShowcase([
+      { ...base, slug: 'real', origin: 'client' },
+      { ...base, slug: 'tetr', origin: 'study' },
+      { ...base, slug: 'clone', origin: 'practice' },
+    ])
+    expect(result.map((p) => p.slug)).toEqual(['real'])
   })
 
   it('сортує від найсвіжішого', () => {

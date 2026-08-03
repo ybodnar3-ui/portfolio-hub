@@ -19,8 +19,12 @@ function localTarget(localPath) {
   return fs.existsSync(index) ? index : null
 }
 
+/* Знімаємо тільки те, що має інтерфейс. Скрейпери й боти (kind: tool),
+   презентації та звіти малюють свою картку без скріншота. */
+const SHOOTABLE = new Set(['web', 'app'])
+
 function resolveUrl(project) {
-  if (project.kind !== 'web') return null
+  if (!SHOOTABLE.has(project.kind)) return null
   if (project.liveUrl && project.health !== 'broken') return project.liveUrl
   const local = localTarget(project.localPath)
   return local ? pathToFileURL(local).href : null
