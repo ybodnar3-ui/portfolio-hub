@@ -1,26 +1,259 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────
+   Токени. Темна кінематографічна база: холодний чорний фон,
+   тепла off-white типографіка, латунний акцент. Ця напруга
+   холодного й теплого і дає «плівковий» вигляд.
+   ───────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #08080a;
+  --surface: #101013;
+  --surface-raised: #17171b;
+  --text: #ede9e1;
+  --muted: #8b867e;
+  --faint: #55524d;
+  --accent: #c6a667;
+  --accent-dim: rgba(198, 166, 103, 0.16);
+  --border: rgba(237, 233, 225, 0.08);
+  --border-strong: rgba(237, 233, 225, 0.16);
+
+  /* Прапорці дошки (Задача 15). Значення зафіксовані в ТЗ. */
+  --flag-broken: oklch(0.62 0.21 25);
+  --flag-stale: oklch(0.78 0.15 85);
+
+  /* Ритм */
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --measure: 68ch;
+
+  /* Крива входу — пружна, без перельоту */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Прокидаємо токени в Tailwind: звідси беруться утиліти
+   bg-surface, text-ink, text-muted, border-line, font-serif тощо.
+   Довільних значень виду text-[--var] уникаємо — у Tailwind 4
+   вони застарілі й мовчки дають невалідний CSS. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-raised: var(--surface-raised);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --font-serif: var(--font-display), ui-serif, Georgia, serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ───────────────────────────── База ───────────────────────────── */
+
+* {
+  min-width: 0;
+}
+
+html {
+  background: var(--bg);
+  color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "kern", "liga";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), ui-serif, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--accent);
+  color: #0b0b0c;
+}
+
+/* Смуга прокрутки під тон сторінки */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #23232a;
+  border: 2px solid var(--bg);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #32323b;
+}
+
+/* Фокус видно завжди — курсор ми ховаємо, клавіатуру ні */
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─────────────────────── Зерно плівки ───────────────────────
+   Один SVG-шум поверх усього. Прибирає банding на градієнтах
+   і дає темряві фактуру, якої не буває в плоскому #000.
+   ───────────────────────────────────────────────────────────── */
+
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─────────────────────── Поява секцій ───────────────────────
+   Scroll-driven там, де підтримується. Де ні — animation-timeline
+   ігнорується, анімація просто програється при завантаженні.
+   Контент видимий у будь-якому разі: ховати його назавжди,
+   якщо щось не спрацювало, не можна.
+   ───────────────────────────────────────────────────────────── */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.reveal {
+  animation: rise 0.9s var(--ease-out) both;
+  animation-delay: var(--delay, 0s);
+  will-change: transform, opacity;
+}
+
+@supports (animation-timeline: view()) {
+  .reveal-on-scroll {
+    animation: rise 1s linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 42%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal,
+  .reveal-on-scroll {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─────────────────────── Кастом-курсор ─────────────────────── */
+
+html.has-cursor,
+html.has-cursor * {
+  cursor: none;
+}
+
+.cursor-ring,
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 50%;
+  will-change: transform;
+  /* До першого руху миші позиції ще немає — не показуємо кільце в кутку.
+     Вмикає видимість сам компонент, а не глобальний клас: інакше
+     подвійне монтування в dev знімає клас у живого інстансу. */
+  opacity: 0;
+}
+
+/* Розмір кільця міняємо через `scale`, а не через width/height/margin:
+   геометрія лишається сталою, анімується композитна властивість,
+   і `transform` вільний під позиціювання. */
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid var(--border-strong);
+  scale: 1;
+  transition:
+    scale 0.28s var(--ease-out),
+    background-color 0.28s var(--ease-out),
+    border-color 0.28s var(--ease-out);
+}
+
+.cursor-ring.is-hover {
+  scale: 1.7;
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.cursor-dot {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  background: var(--accent);
+  transition: opacity 0.2s linear;
+}
+
+.cursor-ring.is-hover + .cursor-dot {
+  opacity: 0;
+}
+
+/* ─────────────────────── Дрібниці ─────────────────────── */
+
+/* Підкреслення, що доїжджає зліва */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out);
+}
+.link-underline:hover::after,
+.link-underline[data-active="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Cormorant за замовчуванням дає старостильні цифри — «1» стає схожою на «I».
+   Скрізь, де число має читатись як число, вмикаємо капітальні й табличні. */
+.num {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Надрядковий службовий підпис */
+.eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
