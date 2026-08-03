@@ -5,8 +5,8 @@
       "name": "portfolio-hub",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 3000,
-      "autoPort": true
+      "port": 3007,
+      "autoPort": false
     }
   ]
 }
