@@ -21,7 +21,7 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-06-15",
-    "health": "unknown"
+    "health": "ok"
   },
   {
     "slug": "altus-store",
@@ -45,7 +45,7 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-22",
-    "health": "unknown"
+    "health": "ok"
   },
   {
     "slug": "revela-store",
@@ -70,7 +70,7 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-22",
-    "health": "unknown"
+    "health": "ok"
   },
   {
     "slug": "aquastar",
@@ -94,7 +94,7 @@
     "nextStep": "Проставити TELEGRAM_BOT_TOKEN і CHAT_ID на Vercel",
     "blocker": "",
     "lastTouched": "2026-06-30",
-    "health": "unknown"
+    "health": "ok"
   },
   {
     "slug": "medcentar",
@@ -106,7 +106,7 @@
       "vanilla HTML"
     ],
     "liveUrl": null,
-    "localPath": "~/Claude/medcentar",
+    "localPath": "~/Claude/medcentar/landing",
     "tags": [
       "landing",
       "medical",
@@ -140,7 +140,7 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-05",
-    "health": "unknown"
+    "health": "ok"
   },
   {
     "slug": "linco-offers",
