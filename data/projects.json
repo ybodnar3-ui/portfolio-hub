@@ -17,7 +17,9 @@
       "demo"
     ],
     "status": "done",
-    "featureSlugs": [],
+    "featureSlugs": [
+      "video-lock"
+    ],
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-06-15",

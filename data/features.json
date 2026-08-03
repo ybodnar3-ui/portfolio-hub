@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "slug": "video-lock",
+    "title": "Замок на відео",
+    "summary": "Структура контенту відкрита всім, самі відео замкнені до оплати",
+    "tags": ["access", "video", "paywall"],
+    "fromProject": "artpro",
+    "deps": []
+  }
+]
