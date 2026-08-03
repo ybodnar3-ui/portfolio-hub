@@ -5,7 +5,6 @@ export function FeatureCard({ feature }: { feature: Feature }) {
   return (
     <Link
       href={`/lab/${feature.slug}`}
-      data-cursor="hover"
       className="group flex h-full flex-col justify-between border border-line bg-surface p-6 transition-colors duration-500 hover:border-line-strong hover:bg-raised"
     >
       <div>

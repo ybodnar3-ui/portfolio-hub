@@ -167,59 +167,17 @@ p {
   }
 }
 
-/* ─────────────────────── Кастом-курсор ─────────────────────── */
+/* ─────────────────────── Курсор ───────────────────────
+   Системний. Кастомний курсор прибрано на прохання автора:
+   кільце, що доганяє мишу, заважає більше, ніж додає.
+   Tailwind 4 у preflight ставить кнопкам cursor: default —
+   повертаємо звичну поведінку.
+   ───────────────────────────────────────────────────────── */
 
-html.has-cursor,
-html.has-cursor * {
-  cursor: none;
-}
-
-.cursor-ring,
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  pointer-events: none;
-  border-radius: 50%;
-  will-change: transform;
-  /* До першого руху миші позиції ще немає — не показуємо кільце в кутку.
-     Вмикає видимість сам компонент, а не глобальний клас: інакше
-     подвійне монтування в dev знімає клас у живого інстансу. */
-  opacity: 0;
-}
-
-/* Розмір кільця міняємо через `scale`, а не через width/height/margin:
-   геометрія лишається сталою, анімується композитна властивість,
-   і `transform` вільний під позиціювання. */
-.cursor-ring {
-  width: 34px;
-  height: 34px;
-  margin: -17px 0 0 -17px;
-  border: 1px solid var(--border-strong);
-  scale: 1;
-  transition:
-    scale 0.28s var(--ease-out),
-    background-color 0.28s var(--ease-out),
-    border-color 0.28s var(--ease-out);
-}
-
-.cursor-ring.is-hover {
-  scale: 1.7;
-  border-color: var(--accent);
-  background: var(--accent-dim);
-}
-
-.cursor-dot {
-  width: 4px;
-  height: 4px;
-  margin: -2px 0 0 -2px;
-  background: var(--accent);
-  transition: opacity 0.2s linear;
-}
-
-.cursor-ring.is-hover + .cursor-dot {
-  opacity: 0;
+button:not(:disabled),
+summary,
+[role="button"] {
+  cursor: pointer;
 }
 
 /* ─────────────────────── Дрібниці ─────────────────────── */

@@ -22,7 +22,6 @@ export function CodePanel({ code }: { code: string }) {
         <button
           type="button"
           onClick={copy}
-          data-cursor="hover"
           className="text-[0.8125rem] tracking-[0.06em] text-muted transition-colors duration-300 hover:text-accent"
         >
           {copied ? 'Скопійовано' : 'Копіювати код'}

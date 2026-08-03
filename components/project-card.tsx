@@ -9,7 +9,6 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={`/work/${project.slug}`}
-      data-cursor="hover"
       className="group block focus-visible:outline-offset-8"
     >
       <LivePreview project={project} hasShot={hasShot(project.slug)} />

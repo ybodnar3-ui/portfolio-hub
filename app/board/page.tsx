@@ -40,7 +40,6 @@ export default function BoardPage() {
         {/* Згорнуте за замовчуванням, щоб не тіснити дошку. */}
         <details className="mt-10 border-t border-line pt-5">
           <summary
-            data-cursor="hover"
             className="cursor-pointer list-none text-[0.8125rem] tracking-[0.06em] text-muted transition-colors duration-300 hover:text-ink"
           >
             Скільки годин пішло <span className="text-faint">— база для розрахунку ціни</span>

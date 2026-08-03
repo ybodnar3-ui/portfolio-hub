@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Manrope } from 'next/font/google'
 import './globals.css'
-import { CustomCursor } from '@/components/custom-cursor'
 import { SiteHeader } from '@/components/site-header'
 import { TimerProvider } from '@/components/timer-provider'
 import { getProjects } from '@/lib/data'
@@ -40,7 +39,6 @@ export default function RootLayout({
     >
       <body className="grain flex min-h-full flex-col">
         <TimerProvider titles={titles}>
-          <CustomCursor />
           <SiteHeader />
           {children}
         </TimerProvider>

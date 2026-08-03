@@ -85,7 +85,6 @@ function LoginForm() {
         <button
           type="submit"
           disabled={busy || !password}
-          data-cursor="hover"
           className="mt-8 w-full border border-line-strong px-6 py-3 text-sm tracking-[0.08em] text-ink transition-colors duration-300 hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-line-strong disabled:hover:text-ink"
         >
           {busy ? 'Перевіряю…' : 'Увійти'}

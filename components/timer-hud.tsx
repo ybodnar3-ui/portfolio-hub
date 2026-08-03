@@ -16,7 +16,6 @@ export function TimerHud() {
   return (
     <Link
       href={`/work/${running.projectSlug}`}
-      data-cursor="hover"
       className="inline-flex items-center gap-2.5 border border-accent/40 px-3 py-1.5 text-xs text-accent transition-colors duration-300 hover:border-accent"
     >
       <span aria-hidden className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />

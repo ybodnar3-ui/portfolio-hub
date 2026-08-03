@@ -19,7 +19,6 @@ export function BoardCard({
   return (
     <Link
       href={`/work/${project.slug}`}
-      data-cursor="hover"
       draggable={editable}
       onDragStart={(event) => {
         if (!editable) return

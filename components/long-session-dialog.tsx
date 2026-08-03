@@ -87,7 +87,6 @@ export function LongSessionDialog({
             type="button"
             onClick={write}
             disabled={!valid || busy}
-            data-cursor="hover"
             className="border border-accent px-6 py-3 text-sm tracking-[0.06em] text-accent transition-opacity duration-300 hover:opacity-80 disabled:opacity-40"
           >
             {busy ? 'Записую…' : 'Записати'}
@@ -95,7 +94,6 @@ export function LongSessionDialog({
           <button
             type="button"
             onClick={onCancel}
-            data-cursor="hover"
             className="border border-line px-6 py-3 text-sm tracking-[0.06em] text-muted transition-colors duration-300 hover:text-ink"
           >
             Скасувати

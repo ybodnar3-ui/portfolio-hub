@@ -52,7 +52,6 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             href={project.liveUrl}
             target="_blank"
             rel="noreferrer"
-            data-cursor="hover"
             className="mt-10 inline-flex items-center gap-3 border border-line-strong px-6 py-3 text-sm tracking-[0.08em] text-ink transition-colors duration-300 hover:border-accent hover:text-accent"
           >
             Відкрити сайт
@@ -113,7 +112,6 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
               <li key={feature.slug}>
                 <Link
                   href={`/lab/${feature.slug}`}
-                  data-cursor="hover"
                   className="group flex items-baseline justify-between gap-6 py-5"
                 >
                   <span className="font-serif text-2xl text-ink transition-colors duration-300 group-hover:text-accent">
