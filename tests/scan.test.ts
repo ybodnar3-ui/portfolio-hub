@@ -60,4 +60,14 @@ describe('mergeProjects', () => {
     expect(result[0].repo).toBe('some-repo')
     expect(result[0].origin).toBe('practice')
   })
+
+  it('не вигадує домен за назвою проєкту у Vercel', () => {
+    // `<projectName>.vercel.app` глобально унікальний і буває чужим —
+    // саме так у портфоліо потрапив чужий сайт.
+    const result = mergeProjects([], [
+      { slug: 'restaurant-pwa', repo: 'restaurant-pwa', vercelProject: 'restaurant-pwa' },
+    ])
+    expect(result[0].liveUrl).toBeNull()
+    expect(result[0].nextStep).toContain('restaurant-pwa')
+  })
 })

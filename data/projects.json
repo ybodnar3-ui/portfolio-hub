@@ -558,7 +558,7 @@
     "kind": "app",
     "origin": "client",
     "stack": [],
-    "liveUrl": "https://aquastar-web.vercel.app",
+    "liveUrl": null,
     "localPath": "~/aquafresh-automation/aquafresh-automation",
     "tags": [
       "pwa",
@@ -567,10 +567,10 @@
     ],
     "status": "finishing",
     "featureSlugs": [],
-    "nextStep": "Довести до go-live",
+    "nextStep": "Перевірити деплой: aquastar-web не відгукується за жодним аліасом",
     "blocker": "",
     "lastTouched": "2026-06-29",
-    "health": "broken"
+    "health": "unknown"
   },
   {
     "slug": "ai-outreach-site",
@@ -738,7 +738,7 @@
       "react",
       "react-dom"
     ],
-    "liveUrl": "https://michael-project.vercel.app",
+    "liveUrl": "https://michael-project-puce.vercel.app",
     "localPath": "~/michael-project",
     "tags": [
       "ai",
@@ -827,7 +827,7 @@
       "@supabase/ssr",
       "@supabase/supabase-js"
     ],
-    "liveUrl": "https://restaurant-pwa.vercel.app",
+    "liveUrl": null,
     "localPath": "~/restaurant-pwa /restaurant-pwa",
     "tags": [
       "pwa",
@@ -836,10 +836,10 @@
     ],
     "status": "in-progress",
     "featureSlugs": [],
-    "nextStep": "",
+    "nextStep": "Дати публічний вхід: restaurant-pwa-ochre.vercel.app віддає 404 у корені",
     "blocker": "",
     "lastTouched": "2026-08-03",
-    "health": "ok"
+    "health": "unknown"
   },
   {
     "slug": "sidequest",

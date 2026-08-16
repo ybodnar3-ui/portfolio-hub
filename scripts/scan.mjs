@@ -108,7 +108,21 @@ function describe(dir, name) {
     title: name,
     localPath: dir.replace(HOME, '~'),
     stack: stackOf(dir),
-    liveUrl: vercel?.projectName ? `https://${vercel.projectName}.vercel.app` : null,
+
+    /**
+     * liveUrl НЕ виводиться з projectName.
+     *
+     * `.vercel/project.json` містить назву проєкту всередині твоєї команди,
+     * а не публічний домен. Домен `<projectName>.vercel.app` глобально
+     * унікальний і часто зайнятий чужим проєктом: `restaurant-pwa.vercel.app`
+     * виявився чужим трекером витрат, і його знімок потрапив у портфоліо.
+     * Коли просте імʼя зайняте, Vercel дає аліас на кшталт
+     * `restaurant-pwa-ochre` чи `aquastar-plum` — вгадати його неможливо.
+     *
+     * Тому адресу ставить людина. Підказку, де її взяти, кладемо в nextStep.
+     */
+    liveUrl: null,
+    vercelProject: vercel?.projectName ?? null,
     remote: remoteUrl(dir),
     lastTouched: touched,
   }
