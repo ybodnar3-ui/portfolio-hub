@@ -5,6 +5,7 @@ import { type BoardItem } from '@/components/board-column'
 import { BoardFilter } from '@/components/board-filter'
 import { TimeSummary } from '@/components/time-summary'
 import { NewProject } from '@/components/new-project'
+import { RunScripts } from '@/components/run-scripts'
 
 /* Після запису в JSON дошка має показувати свіжий стан без перезбірки. */
 export const dynamic = 'force-dynamic'
@@ -41,6 +42,7 @@ export default function BoardPage() {
 
           <div className="flex items-center gap-6">
             <Stat label="Записано часу" value={`${Math.round(tracked / 60)} год`} />
+            {editable && <RunScripts />}
             {editable && <NewProject />}
           </div>
         </div>

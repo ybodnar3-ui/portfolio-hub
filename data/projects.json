@@ -139,7 +139,7 @@
     "featureSlugs": [],
     "nextStep": "",
     "blocker": "",
-    "lastTouched": "2026-07-29",
+    "lastTouched": "2026-08-18",
     "health": "unknown",
     "notes": []
   },
@@ -504,7 +504,7 @@
     "featureSlugs": [],
     "nextStep": "",
     "blocker": "",
-    "lastTouched": "2026-07-28",
+    "lastTouched": "2026-08-16",
     "health": "unknown",
     "notes": []
   },
@@ -535,7 +535,7 @@
     "featureSlugs": [],
     "nextStep": "",
     "blocker": "",
-    "lastTouched": "2026-07-28",
+    "lastTouched": "2026-08-16",
     "health": "unknown",
     "notes": []
   },
@@ -869,7 +869,7 @@
     "featureSlugs": [],
     "nextStep": "Дати публічний вхід: restaurant-pwa-ochre.vercel.app віддає 404 у корені",
     "blocker": "",
-    "lastTouched": "2026-08-03",
+    "lastTouched": "2026-08-18",
     "health": "unknown",
     "notes": []
   },
@@ -987,6 +987,33 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-05-12",
+    "health": "unknown",
+    "notes": []
+  },
+  {
+    "slug": "agency-website-v2",
+    "repo": "agency-website-v2",
+    "title": "agency-website-v2",
+    "tagline": "",
+    "story": "",
+    "kind": "web",
+    "origin": "practice",
+    "stack": [
+      "@react-three/drei",
+      "@react-three/fiber",
+      "@react-three/postprocessing",
+      "@splinetool/react-spline",
+      "@splinetool/runtime",
+      "clsx"
+    ],
+    "liveUrl": null,
+    "localPath": "~/agency-website-v2",
+    "tags": [],
+    "status": "idea",
+    "featureSlugs": [],
+    "nextStep": "",
+    "blocker": "",
+    "lastTouched": "2026-08-18",
     "health": "unknown",
     "notes": []
   }
