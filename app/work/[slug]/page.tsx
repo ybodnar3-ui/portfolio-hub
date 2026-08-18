@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import { getProject, getProjects, getFeatures, getTimeData, hasShot } from '@/lib/data'
 import { totalMinutes, formatDuration } from '@/lib/time'
 import { KIND_LABEL, ORIGIN_LABEL } from '@/lib/labels'
+import { ProjectEditor } from '@/components/project-editor'
+import { ProjectNotes } from '@/components/project-notes'
 
 export function generateStaticParams() {
   return getProjects().map((p) => ({ slug: p.slug }))
@@ -29,6 +31,9 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
     .filter((e) => e.projectSlug === slug)
     .sort((a, b) => b.startedAt.localeCompare(a.startedAt))
 
+  // Дошка пише в JSON тільки на localhost — редагування теж.
+  const editable = process.env.NODE_ENV !== 'production'
+
   return (
     <main className="pb-20" style={{ paddingInline: 'var(--gutter)' }}>
       <div className="pt-10">
@@ -47,22 +52,24 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           {project.tagline}
         </p>
 
-        {project.liveUrl && (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-primary mt-6"
-          >
-            Відкрити сайт
-            <span aria-hidden>↗</span>
-          </a>
-        )}
+        <div className="mt-6 flex flex-wrap gap-2">
+          {project.liveUrl && (
+            <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn btn-primary">
+              Відкрити сайт
+              <span aria-hidden>↗</span>
+            </a>
+          )}
+          {editable && <ProjectEditor project={project} />}
+        </div>
       </header>
 
       <div className="grid gap-x-12 gap-y-10 py-10 lg:grid-cols-[minmax(0,1fr)_19rem]">
         <div className="reveal">
           <p className="max-w-[68ch] text-[0.95rem] leading-[1.75] text-ink/85">{project.story}</p>
+
+          <div className="mt-10">
+            <ProjectNotes slug={project.slug} notes={project.notes} editable={editable} />
+          </div>
 
           {hasShot(project.slug) && (
             <img

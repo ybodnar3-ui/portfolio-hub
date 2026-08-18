@@ -25,7 +25,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-06-15",
-    "health": "ok"
+    "health": "ok",
+    "notes": []
   },
   {
     "slug": "altus-store",
@@ -53,7 +54,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-22",
-    "health": "ok"
+    "health": "ok",
+    "notes": []
   },
   {
     "slug": "revela-store",
@@ -82,7 +84,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-22",
-    "health": "ok"
+    "health": "ok",
+    "notes": []
   },
   {
     "slug": "aquastar",
@@ -111,7 +114,8 @@
     "nextStep": "Проставити TELEGRAM_BOT_TOKEN і CHAT_ID на Vercel",
     "blocker": "",
     "lastTouched": "2026-06-30",
-    "health": "ok"
+    "health": "ok",
+    "notes": []
   },
   {
     "slug": "medcentar",
@@ -136,7 +140,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-29",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "brownhill-offer",
@@ -161,7 +166,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-05",
-    "health": "ok"
+    "health": "ok",
+    "notes": []
   },
   {
     "slug": "linco-offers",
@@ -186,7 +192,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-05",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "agency-crm",
@@ -211,7 +218,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-05",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "ofm-automation",
@@ -236,7 +244,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-05",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "bodnar-ortho",
@@ -261,7 +270,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-05",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "booking-clone",
@@ -285,7 +295,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-06-17",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "shader-app",
@@ -311,7 +322,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-04-02",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "spotlight-demo",
@@ -336,7 +348,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-04-02",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "altus-pitch",
@@ -361,7 +374,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-21",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "revela-pitch",
@@ -386,7 +400,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-22",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "revela-gtm",
@@ -412,7 +427,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-22",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "tmc-report",
@@ -436,7 +452,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-25",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "linkedin-outreach-mvp",
@@ -458,7 +475,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-04-14",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "agency-site-draft",
@@ -487,7 +505,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-28",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "agency-site",
@@ -517,7 +536,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-28",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "willhaben-monitor",
@@ -547,7 +567,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-04-16",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "water-delivery-ops",
@@ -570,7 +591,8 @@
     "nextStep": "Перевірити деплой: aquastar-web не відгукується за жодним аліасом",
     "blocker": "",
     "lastTouched": "2026-06-29",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "ai-outreach-site",
@@ -593,7 +615,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-06-17",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "bestsecret-monitor",
@@ -622,7 +645,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-05-11",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "relations-crm",
@@ -652,7 +676,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-01",
-    "health": "ok"
+    "health": "ok",
+    "notes": []
   },
   {
     "slug": "inventory-sync",
@@ -675,7 +700,8 @@
     "nextStep": "Реалізувати пайплайн за планом sync-pipeline",
     "blocker": "",
     "lastTouched": "2026-07-24",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "instagram-sales-bot",
@@ -698,7 +724,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-05-21",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "linkedin-outreach",
@@ -721,7 +748,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-06-24",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "automation-diagnostic",
@@ -750,7 +778,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-06-23",
-    "health": "ok"
+    "health": "ok",
+    "notes": []
   },
   {
     "slug": "marketplace-reply-bot",
@@ -779,7 +808,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-04-10",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "offer-machine",
@@ -809,7 +839,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-27",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "restaurant-menu-pwa",
@@ -839,7 +870,8 @@
     "nextStep": "Дати публічний вхід: restaurant-pwa-ochre.vercel.app віддає 404 у корені",
     "blocker": "",
     "lastTouched": "2026-08-03",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "sidequest",
@@ -869,7 +901,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-06-17",
-    "health": "ok"
+    "health": "ok",
+    "notes": []
   },
   {
     "slug": "lost-dog-monitor",
@@ -899,7 +932,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-04-19",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "telegram-outreach",
@@ -925,7 +959,8 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-07-10",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   },
   {
     "slug": "telegram-lead-monitor",
@@ -952,6 +987,7 @@
     "nextStep": "",
     "blocker": "",
     "lastTouched": "2026-05-12",
-    "health": "unknown"
+    "health": "unknown",
+    "notes": []
   }
 ]

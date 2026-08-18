@@ -8,7 +8,7 @@ const existing: Project = {
   story: 'Написано людиною', kind: 'web', origin: 'client', stack: ['Next.js'],
   liveUrl: null, localPath: '~/Claude/aquastar', tags: ['landing'],
   status: 'finishing', featureSlugs: [], nextStep: 'Дожати форму',
-  blocker: '', lastTouched: '2026-06-30', health: 'unknown',
+  blocker: '', lastTouched: '2026-06-30', health: 'unknown', notes: [],
 }
 
 describe('mergeProjects', () => {

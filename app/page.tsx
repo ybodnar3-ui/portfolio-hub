@@ -3,6 +3,7 @@ import { BOARD_COLUMNS, groupByColumn, isStale } from '@/lib/status'
 import { totalMinutes } from '@/lib/time'
 import { BoardColumn, type BoardItem } from '@/components/board-column'
 import { TimeSummary } from '@/components/time-summary'
+import { NewProject } from '@/components/new-project'
 import type { ProjectStatus } from '@/lib/types'
 
 /* Після запису в JSON дошка має показувати свіжий стан без перезбірки. */
@@ -44,7 +45,10 @@ export default function BoardPage() {
             </p>
           </div>
 
-          <Stat label="Записано часу" value={`${Math.round(tracked / 60)} год`} />
+          <div className="flex items-center gap-6">
+            <Stat label="Записано часу" value={`${Math.round(tracked / 60)} год`} />
+            {editable && <NewProject />}
+          </div>
         </div>
 
         <details className="card mt-8 p-5">

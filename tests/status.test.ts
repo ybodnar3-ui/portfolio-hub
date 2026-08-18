@@ -6,7 +6,7 @@ const base: Project = {
   slug: 'x', repo: 'x', title: 'X', tagline: '', story: '', kind: 'web', origin: 'client',
   stack: [], liveUrl: null, localPath: '', tags: [], status: 'in-progress',
   featureSlugs: [], nextStep: '', blocker: '', lastTouched: '2026-01-01',
-  health: 'unknown',
+  health: 'unknown', notes: [],
 }
 
 const NOW = new Date('2026-07-31T00:00:00Z')

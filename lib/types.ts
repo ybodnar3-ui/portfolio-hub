@@ -26,6 +26,13 @@ export type ProjectOrigin = 'client' | 'product' | 'study' | 'practice'
 
 export type Health = 'ok' | 'broken' | 'unknown'
 
+/** Нотатка до проєкту: те, що не лізе в опис, але шкода забути. */
+export interface ProjectNote {
+  id: string
+  at: string        // ISO
+  text: string
+}
+
 export interface Project {
   slug: string
   /**
@@ -50,6 +57,7 @@ export interface Project {
   blocker: string
   lastTouched: string   // YYYY-MM-DD, автогенерується
   health: Health        // автогенерується; unknown = немає liveUrl
+  notes: ProjectNote[]
 }
 
 export interface Feature {
