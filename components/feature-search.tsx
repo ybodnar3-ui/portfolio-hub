@@ -59,7 +59,7 @@ export function FeatureSearch({ features }: { features: Feature[] }) {
       </p>
 
       {shown.length === 0 ? (
-        <p className="mt-8 font-serif text-xl text-muted">Нічого не знайшлось.</p>
+        <p className="mt-8 text-base font-semibold text-muted">Нічого не знайшлось.</p>
       ) : (
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {shown.map((f) => (

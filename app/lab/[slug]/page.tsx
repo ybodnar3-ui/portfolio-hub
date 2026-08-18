@@ -94,7 +94,7 @@ function Notes({ source }: { source: string }) {
         const heading = block.match(/^(#{1,3})\s+(.*)$/)
         if (heading) {
           return (
-            <h3 key={i} className="font-serif text-lg text-ink">
+            <h3 key={i} className="text-[0.9375rem] font-semibold text-ink">
               {heading[2]}
             </h3>
           )

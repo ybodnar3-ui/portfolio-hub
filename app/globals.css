@@ -8,31 +8,38 @@
    ───────────────────────────────────────────────────────────── */
 
 :root {
-  --bg: #f6f5f2;
+  --bg: #f5f7fa;
   --surface: #ffffff;
-  --raised: #fbfaf7;
-  --ink: #1b1a18;
-  --muted: #6a675f;
-  --faint: #9b978d;
+  --raised: #eef1f6;
+  --ink: #161a21;
+  --muted: #59616f;
+  --faint: #8a93a2;
 
-  --accent: #146b4e;
-  --accent-hover: #0f5741;
-  --accent-soft: #e6f0eb;
+  /* Синій — для дій. Яскравий, але не кислотний: на білому дає
+     контраст 5.9:1, тобто читається і дрібним. */
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: #e8f0fe;
   --on-accent: #ffffff;
 
-  --border: rgba(27, 26, 24, 0.1);
-  --border-strong: rgba(27, 26, 24, 0.2);
+  /* Запущений таймер — зелений. Колір тут несе сенс, а не прикрашає:
+     синій = «натисни», зелений = «зараз іде». */
+  --running: #0f9d58;
+  --running-hover: #0c7f47;
+
+  --border: rgba(22, 26, 33, 0.1);
+  --border-strong: rgba(22, 26, 33, 0.18);
 
   /* Прапорці дошки. Значення з ТЗ були підібрані під темне тло —
      на світлому вони світились і не читались, тому темніші. */
-  --flag-broken: oklch(0.52 0.19 25);
-  --flag-stale: oklch(0.58 0.12 75);
+  --flag-broken: #d13438;
+  --flag-stale: #b26a00;
 
   --radius: 10px;
   --radius-sm: 7px;
 
-  --shadow-sm: 0 1px 2px rgba(27, 26, 24, 0.05), 0 1px 3px rgba(27, 26, 24, 0.04);
-  --shadow-md: 0 2px 4px rgba(27, 26, 24, 0.04), 0 8px 20px rgba(27, 26, 24, 0.07);
+  --shadow-sm: 0 1px 2px rgba(22, 26, 33, 0.06), 0 1px 3px rgba(22, 26, 33, 0.04);
+  --shadow-md: 0 2px 4px rgba(22, 26, 33, 0.05), 0 8px 20px rgba(22, 26, 33, 0.08);
 
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -51,8 +58,9 @@
   --color-line-strong: var(--border-strong);
   --color-broken: var(--flag-broken);
   --color-stale: var(--flag-stale);
-  --font-serif: var(--font-display), ui-serif, Georgia, serif;
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --color-running: var(--running);
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
 }
 
 /* ───────────────────────────── База ───────────────────────────── */
@@ -68,17 +76,27 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  font-feature-settings: "kern", "liga";
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  font-feature-settings: "kern", "liga", "cv05";
   -webkit-font-smoothing: antialiased;
 }
 
+/* Заголовки — той самий шрифт. Різниця у вазі й розмірі,
+   а не в гарнітурі: так інтерфейс читається як одне ціле. */
 h1, h2, h3, h4 {
-  font-family: var(--font-display), ui-serif, Georgia, serif;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.25;
   text-wrap: balance;
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.125rem; }
+
+code, pre, .font-mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
 }
 
 p { text-wrap: pretty; }
@@ -91,11 +109,11 @@ p { text-wrap: pretty; }
 ::-webkit-scrollbar { width: 12px; height: 12px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: #d8d5cd;
+  background: #cfd6e0;
   border: 3px solid var(--bg);
   border-radius: 99px;
 }
-::-webkit-scrollbar-thumb:hover { background: #c4c0b6; }
+::-webkit-scrollbar-thumb:hover { background: #b6c0ce; }
 
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -168,6 +186,14 @@ summary,
 }
 .btn-default:not(:disabled):active { transform: translateY(0); }
 
+/* Запущений таймер. Зелений, бо це стан, а не дія. */
+.btn-running {
+  background: var(--running);
+  color: var(--on-accent);
+  box-shadow: var(--shadow-sm);
+}
+.btn-running:not(:disabled):hover { background: var(--running-hover); }
+
 /* Головна дія картки, поки нічого не запущено: кличе, але не кричить. */
 .btn-soft {
   background: var(--accent-soft);
@@ -217,9 +243,8 @@ a.card:hover,
 /* ─────────────────────── Дрібниці ─────────────────────── */
 
 .eyebrow {
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
   color: var(--faint);
   font-weight: 500;
 }
@@ -229,11 +254,11 @@ a.card:hover,
 .chip {
   display: inline-flex;
   align-items: center;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
   background: var(--raised);
-  border: 1px solid var(--border);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
+  font-weight: 500;
   color: var(--muted);
   white-space: nowrap;
 }

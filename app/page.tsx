@@ -76,7 +76,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="text-right">
       <p className="eyebrow">{label}</p>
-      <p className="num mt-1 font-serif text-3xl text-ink">{value}</p>
+      <p className="num mt-1 text-3xl font-semibold text-ink">{value}</p>
     </div>
   )
 }

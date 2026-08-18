@@ -58,7 +58,7 @@ export function LongSessionDialog({
     >
       <div className="card w-full max-w-md p-7 shadow-[var(--shadow-md)]">
         <p className="eyebrow">Довга сесія</p>
-        <h2 id="long-session-title" className="mt-3 font-serif text-2xl leading-snug text-ink">
+        <h2 id="long-session-title" className="mt-3 text-xl font-semibold leading-snug text-ink">
           Таймер по «{projectTitle}» іде з {WHEN.format(new Date(startedAt))}
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-muted">

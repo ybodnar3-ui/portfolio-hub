@@ -8,7 +8,7 @@ export function FeatureCard({ feature }: { feature: Feature }) {
       className="card card-interactive group flex h-full flex-col justify-between p-5"
     >
       <div>
-        <h2 className="font-serif text-xl leading-snug text-ink transition-colors duration-200 group-hover:text-accent">
+        <h2 className="text-base font-semibold leading-snug text-ink transition-colors duration-200 group-hover:text-accent">
           {feature.title}
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-muted">{feature.summary}</p>

@@ -1,21 +1,25 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Manrope } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { SiteHeader } from '@/components/site-header'
 import { TimerProvider } from '@/components/timer-provider'
 import { getProjects } from '@/lib/data'
 
-const display = Cormorant_Garamond({
-  variable: '--font-display',
+/* Один шрифт на весь інтерфейс. Inter зроблений саме під екранні UI:
+   великий x-height, чіткі форми на дрібних кеглях і повна кирилиця.
+   Заголовки відрізняються вагою й розміром, а не іншою гарнітурою. */
+const sans = Inter({
+  variable: '--font-sans',
   subsets: ['latin', 'cyrillic'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 })
 
-const body = Manrope({
-  variable: '--font-body',
+/* Моноширинний тільки там, де він щось означає: код і стек. */
+const mono = JetBrains_Mono({
+  variable: '--font-mono',
   subsets: ['latin', 'cyrillic'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['400', '500'],
   display: 'swap',
 })
 
@@ -34,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="uk"
-      className={`${display.variable} ${body.variable} h-full antialiased`}
+      className={`${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <TimerProvider titles={titles}>

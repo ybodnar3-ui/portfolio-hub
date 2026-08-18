@@ -36,7 +36,7 @@ export function BoardCard({
       <div className="flex items-start justify-between gap-3">
         <Link
           href={`/work/${project.slug}`}
-          className="font-serif text-lg leading-snug text-ink transition-colors duration-200 hover:text-accent"
+          className="text-[0.9375rem] font-semibold leading-snug text-ink transition-colors duration-200 hover:text-accent"
         >
           {project.title}
         </Link>

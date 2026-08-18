@@ -80,7 +80,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
 
           <section>
             <h2 className="eyebrow">Витрачено</h2>
-            <p className="num mt-2 font-serif text-3xl text-ink">{formatDuration(spent)}</p>
+            <p className="num mt-2 text-3xl font-semibold text-ink">{formatDuration(spent)}</p>
 
             {sessions.length > 0 ? (
               <ul className="mt-5 space-y-3 border-t border-line pt-4">
@@ -114,7 +114,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
                   href={`/lab/${feature.slug}`}
                   className="group flex items-baseline justify-between gap-6 rounded-[var(--radius-sm)] px-2 py-4 transition-colors hover:bg-raised"
                 >
-                  <span className="font-serif text-lg text-ink transition-colors duration-200 group-hover:text-accent">
+                  <span className="text-[0.9375rem] font-semibold text-ink transition-colors duration-200 group-hover:text-accent">
                     {feature.title}
                   </span>
                   <span className="max-w-[46ch] text-right text-sm text-muted">

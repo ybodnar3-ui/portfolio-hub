@@ -22,7 +22,7 @@ export function SiteHeader() {
         className="flex items-center gap-8 py-3"
         style={{ paddingInline: 'var(--gutter)' }}
       >
-        <Link href="/" className="font-serif text-lg text-ink" aria-label="На дошку">
+        <Link href="/" className="text-[0.9375rem] font-semibold text-ink" aria-label="На дошку">
           Хаб<span className="text-accent">.</span>
         </Link>
 

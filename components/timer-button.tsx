@@ -48,7 +48,7 @@ export function TimerButton({
       disabled={busy}
       title={running && !mine ? `Зупинить таймер по ${running.projectSlug}` : undefined}
       aria-label={mine ? `Зупинити таймер по ${projectTitle}` : `Почати таймер по ${projectTitle}`}
-      className={`btn btn-sm ${mine ? 'btn-primary' : 'btn-soft'}`}
+      className={`btn btn-sm ${mine ? 'btn-running' : 'btn-soft'}`}
     >
       <span aria-hidden>{mine ? '◼' : '▶'}</span>
       {mine ? <span className="num">{formatDuration(elapsed)}</span> : 'Старт'}

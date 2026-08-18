@@ -16,9 +16,9 @@ export function TimerHud() {
   return (
     <Link
       href={`/work/${running.projectSlug}`}
-      className="inline-flex items-center gap-2.5 rounded-full border border-accent/30 bg-accent-soft px-3 py-1.5 text-xs font-medium text-accent transition-colors duration-200 hover:border-accent/60"
+      className="inline-flex items-center gap-2.5 rounded-md bg-running px-3 py-1.5 text-xs font-medium text-white transition-opacity duration-200 hover:opacity-90"
     >
-      <span aria-hidden className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+      <span aria-hidden className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
       <span className="max-w-[10rem] truncate">{running.projectSlug}</span>
       <span className="num">{formatDuration(elapsed)}</span>
     </Link>
