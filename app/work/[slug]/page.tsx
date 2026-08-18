@@ -5,6 +5,7 @@ import { totalMinutes, formatDuration } from '@/lib/time'
 import { KIND_LABEL, ORIGIN_LABEL } from '@/lib/labels'
 import { ProjectEditor } from '@/components/project-editor'
 import { ProjectNotes } from '@/components/project-notes'
+import { TimeSessions } from '@/components/time-sessions'
 
 export function generateStaticParams() {
   return getProjects().map((p) => ({ slug: p.slug }))
@@ -85,29 +86,12 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           <Facts label="Стек" items={project.stack} />
           <Facts label="Теги" items={project.tags} />
 
-          <section>
-            <h2 className="eyebrow">Витрачено</h2>
-            <p className="num mt-2 text-3xl font-semibold text-ink">{formatDuration(spent)}</p>
-
-            {sessions.length > 0 ? (
-              <ul className="mt-5 space-y-3 border-t border-line pt-4">
-                {sessions.map((session) => (
-                  <li key={session.id} className="flex items-baseline justify-between gap-4 text-sm">
-                    <span className="text-muted">
-                      {formatDate(session.startedAt.slice(0, 10))}
-                      {session.note && <span className="text-faint"> · {session.note}</span>}
-                      {session.source === 'manual' && (
-                        <span className="text-faint"> · вручну</span>
-                      )}
-                    </span>
-                    <span className="num shrink-0 text-ink">{formatDuration(session.minutes)}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="mt-3 text-sm text-faint">Сесій ще немає.</p>
-            )}
-          </section>
+          <TimeSessions
+            projectSlug={project.slug}
+            sessions={sessions}
+            total={spent}
+            editable={editable}
+          />
         </aside>
       </div>
 

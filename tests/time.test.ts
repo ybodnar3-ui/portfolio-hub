@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   LONG_SESSION_MINUTES, minutesBetween, formatDuration, totalMinutes,
   isLongSession, startTimer, stopTimer, newEntryId,
+  addManualEntry, updateEntry, removeEntry,
 } from '@/lib/time'
 import type { TimeData, TimeEntry } from '@/lib/types'
 
@@ -124,5 +125,70 @@ describe('stopTimer', () => {
   it('без запущеного таймера нічого не змінює', () => {
     const before: TimeData = { running: null, entries: [] }
     expect(stopTimer(before, '2026-07-31T11:00:00.000Z')).toEqual(before)
+  })
+})
+
+describe('addManualEntry', () => {
+  const empty: TimeData = { running: null, entries: [] }
+
+  it('додає сесію заднім числом', () => {
+    const after = addManualEntry(empty, {
+      projectSlug: 'a', minutes: 120, note: 'форма', date: '2026-07-15',
+    })
+    expect(after.entries).toHaveLength(1)
+    expect(after.entries[0]).toMatchObject({
+      projectSlug: 'a', minutes: 120, note: 'форма', source: 'manual',
+    })
+  })
+
+  it('дати перетворює на межі сесії, щоб розбивка не поламалась', () => {
+    const after = addManualEntry(empty, { projectSlug: 'a', minutes: 90, note: '', date: '2026-07-15' })
+    const { startedAt, endedAt } = after.entries[0]
+    expect(startedAt.slice(0, 10)).toBe('2026-07-15')
+    expect(minutesBetween(startedAt, endedAt)).toBe(90)
+  })
+
+  it('нуль і відʼємне не записуються', () => {
+    expect(addManualEntry(empty, { projectSlug: 'a', minutes: 0, note: '', date: '2026-07-15' }).entries).toHaveLength(0)
+    expect(addManualEntry(empty, { projectSlug: 'a', minutes: -5, note: '', date: '2026-07-15' }).entries).toHaveLength(0)
+  })
+
+  it('не мутує вхідні дані', () => {
+    addManualEntry(empty, { projectSlug: 'a', minutes: 60, note: '', date: '2026-07-15' })
+    expect(empty.entries).toHaveLength(0)
+  })
+})
+
+describe('updateEntry', () => {
+  const data: TimeData = { running: null, entries: [entry({ id: 'e_0001', minutes: 60, note: 'старе' })] }
+
+  it('міняє хвилини й нотатку', () => {
+    const after = updateEntry(data, 'e_0001', { minutes: 45, note: 'нове' })
+    expect(after.entries[0].minutes).toBe(45)
+    expect(after.entries[0].note).toBe('нове')
+  })
+
+  it('правлена сесія стає ручною — інакше не видно, що цифру чіпали', () => {
+    expect(updateEntry(data, 'e_0001', { minutes: 45 }).entries[0].source).toBe('manual')
+  })
+
+  it('ігнорує нульові й відʼємні хвилини', () => {
+    expect(updateEntry(data, 'e_0001', { minutes: 0 }).entries[0].minutes).toBe(60)
+  })
+
+  it('невідомий id нічого не змінює', () => {
+    expect(updateEntry(data, 'немає', { minutes: 5 })).toEqual(data)
+  })
+})
+
+describe('removeEntry', () => {
+  it('видаляє за id', () => {
+    const data: TimeData = { running: null, entries: [entry({ id: 'e_0001' }), entry({ id: 'e_0002' })] }
+    expect(removeEntry(data, 'e_0001').entries.map((e) => e.id)).toEqual(['e_0002'])
+  })
+
+  it('невідомий id нічого не ламає', () => {
+    const data: TimeData = { running: null, entries: [entry()] }
+    expect(removeEntry(data, 'немає').entries).toHaveLength(1)
   })
 })

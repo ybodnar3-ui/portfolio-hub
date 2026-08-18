@@ -62,3 +62,59 @@ export function startTimer(
   const stopped = stopTimer(data, nowIso)
   return { running: { projectSlug, startedAt: nowIso }, entries: stopped.entries }
 }
+
+/**
+ * Сесія заднім числом. Точного часу доби ми не знаємо й не вигадуємо:
+ * ставимо межі від 09:00 обраного дня, щоб `startedAt`/`endedAt` лишались
+ * валідними ISO-мітками і розбивка по днях не поламалась.
+ */
+export function addManualEntry(
+  data: TimeData,
+  input: { projectSlug: string; minutes: number; note: string; date: string },
+): TimeData {
+  const minutes = Math.round(input.minutes)
+  if (!Number.isFinite(minutes) || minutes <= 0) return data
+
+  const startedAt = new Date(`${input.date}T09:00:00.000Z`)
+  if (Number.isNaN(startedAt.getTime())) return data
+  const endedAt = new Date(startedAt.getTime() + minutes * 60_000)
+
+  const entry: TimeEntry = {
+    id: newEntryId(data.entries),
+    projectSlug: input.projectSlug,
+    startedAt: startedAt.toISOString(),
+    endedAt: endedAt.toISOString(),
+    minutes,
+    note: input.note.trim(),
+    source: 'manual',
+  }
+  return { ...data, entries: [...data.entries, entry] }
+}
+
+export function updateEntry(
+  data: TimeData,
+  id: string,
+  patch: { minutes?: number; note?: string },
+): TimeData {
+  const index = data.entries.findIndex((e) => e.id === id)
+  if (index === -1) return data
+
+  const current = data.entries[index]
+  const minutes = patch.minutes === undefined ? current.minutes : Math.round(patch.minutes)
+  if (!Number.isFinite(minutes) || minutes <= 0) return data
+
+  const entries = [...data.entries]
+  entries[index] = {
+    ...current,
+    minutes,
+    note: patch.note === undefined ? current.note : patch.note.trim(),
+    // Виправлена цифра більше не «з таймера» — інакше з розбивки не видно,
+    // що її чіпали руками.
+    source: 'manual',
+  }
+  return { ...data, entries }
+}
+
+export function removeEntry(data: TimeData, id: string): TimeData {
+  return { ...data, entries: data.entries.filter((e) => e.id !== id) }
+}
