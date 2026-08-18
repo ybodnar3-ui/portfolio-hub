@@ -51,14 +51,14 @@ export function LongSessionDialog({
 
   return (
     <div
-      className="fixed inset-0 z-[70] grid place-items-center bg-bg/80 p-6 backdrop-blur-sm"
+      className="fixed inset-0 z-[70] grid place-items-center bg-ink/25 p-6 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="long-session-title"
     >
-      <div className="w-full max-w-md border border-line-strong bg-surface p-8">
+      <div className="card w-full max-w-md p-7 shadow-[var(--shadow-md)]">
         <p className="eyebrow">Довга сесія</p>
-        <h2 id="long-session-title" className="mt-4 font-serif text-3xl leading-tight text-ink">
+        <h2 id="long-session-title" className="mt-3 font-serif text-2xl leading-snug text-ink">
           Таймер по «{projectTitle}» іде з {WHEN.format(new Date(startedAt))}
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-muted">
@@ -74,7 +74,7 @@ export function LongSessionDialog({
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && write()}
-            className="num mt-2 w-full border-b border-line-strong bg-transparent pb-3 text-2xl text-ink outline-none transition-colors duration-300 focus:border-accent"
+            className="num mt-2 w-full rounded-[var(--radius-sm)] border border-line-strong bg-surface px-3 py-2.5 text-xl text-ink outline-none transition-colors duration-200 focus:border-accent"
           />
         </label>
 
@@ -87,14 +87,14 @@ export function LongSessionDialog({
             type="button"
             onClick={write}
             disabled={!valid || busy}
-            className="border border-accent px-6 py-3 text-sm tracking-[0.06em] text-accent transition-opacity duration-300 hover:opacity-80 disabled:opacity-40"
+            className="btn btn-primary"
           >
             {busy ? 'Записую…' : 'Записати'}
           </button>
           <button
             type="button"
             onClick={onCancel}
-            className="border border-line px-6 py-3 text-sm tracking-[0.06em] text-muted transition-colors duration-300 hover:text-ink"
+            className="btn btn-default"
           >
             Скасувати
           </button>

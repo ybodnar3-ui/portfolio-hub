@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import type { Project } from '@/lib/types'
 import { formatDuration } from '@/lib/time'
+import { KIND_LABEL } from '@/lib/labels'
 import { TimerButton } from './timer-button'
 
 export function BoardCard({
@@ -16,42 +17,34 @@ export function BoardCard({
   stale: boolean
   editable?: boolean
 }) {
+  const flags = [
+    project.health === 'broken' && { tone: 'broken' as const, text: 'Сайт не відповідає' },
+    stale && { tone: 'stale' as const, text: 'Понад 60 днів без роботи' },
+    project.blocker && { tone: 'stale' as const, text: project.blocker },
+  ].filter(Boolean) as { tone: 'broken' | 'stale'; text: string }[]
+
   return (
-    <Link
-      href={`/work/${project.slug}`}
+    <div
       draggable={editable}
       onDragStart={(event) => {
         if (!editable) return
-        // Якір за замовчуванням тягне свій href — підміняємо на слаг.
         event.dataTransfer.setData('text/plain', project.slug)
         event.dataTransfer.effectAllowed = 'move'
       }}
-      className={`group block border border-line bg-surface p-4 transition-colors duration-300 hover:border-line-strong hover:bg-raised ${
-        editable ? 'cursor-grab active:cursor-grabbing' : ''
-      }`}
+      className={`card card-interactive p-4 ${editable ? 'cursor-grab active:cursor-grabbing' : ''}`}
     >
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-serif text-xl leading-tight text-ink transition-colors duration-300 group-hover:text-accent">
+        <Link
+          href={`/work/${project.slug}`}
+          className="font-serif text-lg leading-snug text-ink transition-colors duration-200 hover:text-accent"
+        >
           {project.title}
-        </h3>
-        <span className="num shrink-0 pt-1 text-[0.6875rem] tracking-[0.1em] text-faint">
-          {project.lastTouched}
-        </span>
-      </div>
-
-      <div className="mt-3 flex items-center justify-between gap-3">
-        <TimerButton
-          projectSlug={project.slug}
-          projectTitle={project.title}
-          editable={editable}
-        />
-        {spent > 0 && (
-          <span className="num text-xs tracking-[0.08em] text-muted">{formatDuration(spent)}</span>
-        )}
+        </Link>
+        <span className="chip shrink-0">{KIND_LABEL[project.kind]}</span>
       </div>
 
       {project.nextStep && (
-        <p className="mt-3 border-l border-line pl-3 text-[0.8125rem] leading-snug text-muted">
+        <p className="mt-3 rounded-[var(--radius-sm)] bg-raised px-3 py-2 text-[0.8125rem] leading-snug text-muted">
           {project.nextStep}
         </p>
       )}
@@ -59,35 +52,32 @@ export function BoardCard({
       {/* Прапорці ортогональні колонці: зламатись може і готовий проєкт.
           Колір дублюється значком і текстом — інформація не має залежати
           від того, чи розрізняє людина відтінки. */}
-      {(project.health === 'broken' || stale || project.blocker) && (
+      {flags.length > 0 && (
         <ul className="mt-3 space-y-1.5">
-          {project.health === 'broken' && (
-            <Flag tone="broken" mark="✕">Сайт не відповідає</Flag>
-          )}
-          {stale && <Flag tone="stale" mark="◷">Понад 60 днів без роботи</Flag>}
-          {project.blocker && <Flag tone="stale" mark="▲">{project.blocker}</Flag>}
+          {flags.map((flag, i) => (
+            <li
+              key={i}
+              className={`flex items-start gap-1.5 text-[0.75rem] leading-snug ${
+                flag.tone === 'broken' ? 'text-broken' : 'text-stale'
+              }`}
+            >
+              <span aria-hidden className="pt-px">{flag.tone === 'broken' ? '✕' : '◷'}</span>
+              <span>{flag.text}</span>
+            </li>
+          ))}
         </ul>
       )}
-    </Link>
-  )
-}
 
-function Flag({
-  tone,
-  mark,
-  children,
-}: {
-  tone: 'broken' | 'stale'
-  mark: string
-  children: React.ReactNode
-}) {
-  const color = tone === 'broken' ? 'text-broken' : 'text-stale'
-  return (
-    <li className={`flex items-start gap-2 text-[0.75rem] leading-snug ${color}`}>
-      <span aria-hidden className="pt-px">
-        {mark}
-      </span>
-      <span>{children}</span>
-    </li>
+      <div className="mt-4 flex items-center justify-between gap-3 border-t border-line pt-3">
+        <TimerButton
+          projectSlug={project.slug}
+          projectTitle={project.title}
+          editable={editable}
+        />
+        <span className="num text-xs text-faint">
+          {spent > 0 ? formatDuration(spent) : project.lastTouched}
+        </span>
+      </div>
+    </div>
   )
 }

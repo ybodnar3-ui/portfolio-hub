@@ -16,18 +16,18 @@ export function CodePanel({ code }: { code: string }) {
   const lines = code.split('\n').length
 
   return (
-    <div className="border border-line bg-surface">
+    <div className="card overflow-hidden">
       <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-3">
         <span className="num eyebrow">index.html · {lines} рядків</span>
         <button
           type="button"
           onClick={copy}
-          className="text-[0.8125rem] tracking-[0.06em] text-muted transition-colors duration-300 hover:text-accent"
+          className="btn btn-sm btn-quiet"
         >
           {copied ? 'Скопійовано' : 'Копіювати код'}
         </button>
       </div>
-      <pre className="max-h-[60vh] overflow-auto p-5 text-[0.8125rem] leading-relaxed text-ink/80">
+      <pre className="max-h-[60vh] overflow-auto bg-raised p-5 font-mono text-[0.8125rem] leading-relaxed text-ink/85">
         <code>{code}</code>
       </pre>
     </div>

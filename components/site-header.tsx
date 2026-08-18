@@ -5,46 +5,40 @@ import { usePathname } from 'next/navigation'
 import { TimerHud } from './timer-hud'
 
 const NAV = [
-  { href: '/', label: 'Роботи' },
+  { href: '/', label: 'Дошка' },
   { href: '/lab', label: 'Lab' },
-  { href: '/board', label: 'Дошка' },
 ]
 
 function isActive(pathname: string, href: string): boolean {
-  return href === '/' ? pathname === '/' : pathname.startsWith(href)
+  return href === '/' ? pathname === '/' || pathname.startsWith('/work') : pathname.startsWith(href)
 }
 
 export function SiteHeader() {
   const pathname = usePathname()
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-[color-mix(in_oklab,var(--bg)_82%,transparent)] backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
       <div
-        className="flex items-center justify-between gap-6 py-4"
+        className="flex items-center gap-8 py-3"
         style={{ paddingInline: 'var(--gutter)' }}
       >
-        <Link
-          href="/"
-          className="font-serif text-lg tracking-tight text-ink"
-          aria-label="На головну"
-        >
-          Portfolio<span className="text-accent">.</span>
+        <Link href="/" className="font-serif text-lg text-ink" aria-label="На дошку">
+          Хаб<span className="text-accent">.</span>
         </Link>
 
-        <nav aria-label="Основна навігація">
-          <ul className="flex items-center gap-7">
+        <nav aria-label="Основна навігація" className="flex-1">
+          <ul className="flex items-center gap-1">
             {NAV.map((item) => {
               const active = isActive(pathname, item.href)
               return (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    data-active={active}
                     aria-current={active ? 'page' : undefined}
-                    className={`link-underline text-[0.8125rem] tracking-[0.06em] transition-colors duration-300 ${
+                    className={`inline-flex rounded-[var(--radius-sm)] px-3 py-1.5 text-sm transition-colors duration-200 ${
                       active
-                        ? 'text-ink'
-                        : 'text-muted hover:text-ink'
+                        ? 'bg-accent-soft font-medium text-accent'
+                        : 'text-muted hover:bg-raised hover:text-ink'
                     }`}
                   >
                     {item.label}
@@ -55,9 +49,7 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="hidden min-w-0 justify-end sm:flex sm:basis-40">
-          <TimerHud />
-        </div>
+        <TimerHud />
       </div>
     </header>
   )

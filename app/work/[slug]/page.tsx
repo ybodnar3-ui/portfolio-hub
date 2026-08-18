@@ -30,20 +30,20 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
     .sort((a, b) => b.startedAt.localeCompare(a.startedAt))
 
   return (
-    <main className="pb-32" style={{ paddingInline: 'var(--gutter)' }}>
+    <main className="pb-20" style={{ paddingInline: 'var(--gutter)' }}>
       <div className="pt-10">
-        <Link href="/" className="eyebrow link-underline">
-          ← Усі роботи
+        <Link href="/" className="btn btn-sm btn-quiet -ml-2">
+          ← На дошку
         </Link>
       </div>
 
-      <header className="reveal border-b border-line pb-14 pt-16">
+      <header className="reveal border-b border-line pb-8 pt-8">
         <p className="eyebrow">
           {KIND_LABEL[project.kind]} · {ORIGIN_LABEL[project.origin]} ·{' '}
           {formatDate(project.lastTouched)}
         </p>
-        <h1 className="mt-5 text-[clamp(2.5rem,8vw,6.5rem)]">{project.title}</h1>
-        <p className="mt-4 max-w-[40ch] font-serif text-2xl italic text-muted">
+        <h1 className="mt-3 text-[clamp(1.9rem,4vw,3rem)]">{project.title}</h1>
+        <p className="mt-2 max-w-[52ch] text-base text-muted">
           {project.tagline}
         </p>
 
@@ -52,7 +52,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             href={project.liveUrl}
             target="_blank"
             rel="noreferrer"
-            className="mt-10 inline-flex items-center gap-3 border border-line-strong px-6 py-3 text-sm tracking-[0.08em] text-ink transition-colors duration-300 hover:border-accent hover:text-accent"
+            className="btn btn-primary mt-6"
           >
             Відкрити сайт
             <span aria-hidden>↗</span>
@@ -60,27 +60,27 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         )}
       </header>
 
-      <div className="grid gap-x-16 gap-y-14 py-16 lg:grid-cols-[minmax(0,1fr)_20rem]">
+      <div className="grid gap-x-12 gap-y-10 py-10 lg:grid-cols-[minmax(0,1fr)_19rem]">
         <div className="reveal">
-          <p className="max-w-[62ch] text-base leading-[1.75] text-ink/85">{project.story}</p>
+          <p className="max-w-[68ch] text-[0.95rem] leading-[1.75] text-ink/85">{project.story}</p>
 
           {hasShot(project.slug) && (
             <img
               src={`/shots/${project.slug}.webp`}
               alt={`Знімок: ${project.title}`}
-              className="mt-12 w-full border border-line"
+              className="card mt-8 w-full overflow-hidden"
               loading="lazy"
             />
           )}
         </div>
 
-        <aside className="space-y-10 lg:pt-1">
+        <aside className="card space-y-7 self-start p-5">
           <Facts label="Стек" items={project.stack} />
           <Facts label="Теги" items={project.tags} />
 
           <section>
             <h2 className="eyebrow">Витрачено</h2>
-            <p className="num mt-3 font-serif text-4xl text-ink">{formatDuration(spent)}</p>
+            <p className="num mt-2 font-serif text-3xl text-ink">{formatDuration(spent)}</p>
 
             {sessions.length > 0 ? (
               <ul className="mt-5 space-y-3 border-t border-line pt-4">
@@ -105,16 +105,16 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       </div>
 
       {features.length > 0 && (
-        <section className="border-t border-line pt-12">
+        <section className="border-t border-line pt-8">
           <h2 className="eyebrow">Фічі звідси</h2>
           <ul className="mt-6 divide-y divide-line">
             {features.map((feature) => (
               <li key={feature.slug}>
                 <Link
                   href={`/lab/${feature.slug}`}
-                  className="group flex items-baseline justify-between gap-6 py-5"
+                  className="group flex items-baseline justify-between gap-6 rounded-[var(--radius-sm)] px-2 py-4 transition-colors hover:bg-raised"
                 >
-                  <span className="font-serif text-2xl text-ink transition-colors duration-300 group-hover:text-accent">
+                  <span className="font-serif text-lg text-ink transition-colors duration-200 group-hover:text-accent">
                     {feature.title}
                   </span>
                   <span className="max-w-[46ch] text-right text-sm text-muted">
@@ -135,9 +135,9 @@ function Facts({ label, items }: { label: string; items: string[] }) {
   return (
     <section>
       <h2 className="eyebrow">{label}</h2>
-      <ul className="mt-3 space-y-1">
+      <ul className="mt-2 flex flex-wrap">
         {items.map((item) => (
-          <li key={item} className="text-sm text-muted">
+          <li key={item} className="chip mr-1.5 mb-1.5">
             {item}
           </li>
         ))}

@@ -9,7 +9,9 @@ export function middleware(request: NextRequest) {
   return NextResponse.redirect(url)
 }
 
-/* API-роути навмисно не в матчері: /api/login має бути доступним, щоб було
-   де ввести пароль, а /api/board і /api/time закриті перевіркою на продакшн
-   і працюють лише на localhost. */
-export const config = { matcher: ['/lab/:path*', '/board'] }
+/* Публічної частини більше немає — закритий весь хаб.
+   Виняток тільки для /login, статики й /api/login: інакше не було б
+   де ввести пароль. */
+export const config = {
+  matcher: ['/((?!login|api/login|_next|favicon.ico|features|shots).*)'],
+}

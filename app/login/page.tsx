@@ -57,11 +57,11 @@ function LoginForm() {
       className="flex flex-1 items-center justify-center py-32"
       style={{ paddingInline: 'var(--gutter)' }}
     >
-      <form onSubmit={submit} className="reveal w-full max-w-sm">
-        <p className="eyebrow">Приватна частина</p>
-        <h1 className="mt-4 text-5xl">Пароль</h1>
+      <form onSubmit={submit} className="card reveal w-full max-w-sm p-8">
+        <p className="eyebrow">Внутрішній хаб</p>
+        <h1 className="mt-3 text-3xl">Пароль</h1>
         <p className="mt-4 text-sm leading-relaxed text-muted">
-          Lab і Дошка закриті. Це бар&apos;єр від випадкового відвідувача, не автентифікація.
+          Хаб закритий цілком. Це бар&apos;єр від випадкового відвідувача, не автентифікація.
         </p>
 
         <input
@@ -72,7 +72,7 @@ function LoginForm() {
           autoComplete="current-password"
           aria-label="Пароль"
           aria-invalid={!!error}
-          className="mt-8 w-full border-b border-line-strong bg-transparent pb-3 text-lg text-ink outline-none transition-colors duration-300 placeholder:text-faint focus:border-accent"
+          className="mt-7 w-full rounded-[var(--radius-sm)] border border-line-strong bg-surface px-3 py-2.5 text-base text-ink outline-none transition-colors duration-200 placeholder:text-faint focus:border-accent"
           placeholder="••••••••"
         />
 
@@ -85,7 +85,7 @@ function LoginForm() {
         <button
           type="submit"
           disabled={busy || !password}
-          className="mt-8 w-full border border-line-strong px-6 py-3 text-sm tracking-[0.08em] text-ink transition-colors duration-300 hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-line-strong disabled:hover:text-ink"
+          className="btn btn-primary mt-6 w-full"
         >
           {busy ? 'Перевіряю…' : 'Увійти'}
         </button>

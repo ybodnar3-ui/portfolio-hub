@@ -1,54 +1,82 @@
-import { getProjects } from '@/lib/data'
-import { visibleOnShowcase } from '@/lib/status'
-import { ProjectCard } from '@/components/project-card'
+import { getProjects, getTimeData } from '@/lib/data'
+import { BOARD_COLUMNS, groupByColumn, isStale } from '@/lib/status'
+import { totalMinutes } from '@/lib/time'
+import { BoardColumn, type BoardItem } from '@/components/board-column'
+import { TimeSummary } from '@/components/time-summary'
+import type { ProjectStatus } from '@/lib/types'
 
-export default function Home() {
-  const projects = visibleOnShowcase(getProjects())
+/* Після запису в JSON дошка має показувати свіжий стан без перезбірки. */
+export const dynamic = 'force-dynamic'
+
+export default function BoardPage() {
+  const projects = getProjects()
+  const { entries } = getTimeData()
+  const now = new Date()
+  const grouped = groupByColumn(projects)
+
+  const enriched = Object.fromEntries(
+    BOARD_COLUMNS.map((column) => [
+      column.id,
+      grouped[column.id].map((project) => ({
+        project,
+        spent: totalMinutes(entries, project.slug),
+        stale: isStale(project, now),
+      })),
+    ]),
+  ) as Record<ProjectStatus, BoardItem[]>
+
+  const editable = process.env.NODE_ENV !== 'production'
+  const active = projects.filter((p) => p.status !== 'archived' && p.status !== 'done').length
+  const flagged = projects.filter(
+    (p) => p.health === 'broken' || p.blocker || isStale(p, now),
+  ).length
+  const tracked = entries.reduce((sum, e) => sum + e.minutes, 0)
 
   return (
-    <main style={{ paddingInline: 'var(--gutter)' }}>
-      <section className="flex min-h-[72vh] flex-col justify-end border-b border-line pb-16 pt-24">
-        <p className="eyebrow reveal">Юра Боднар · vibe coding</p>
-
-        <h1
-          className="reveal mt-6 max-w-[16ch] text-[clamp(3rem,11vw,9.5rem)] leading-[0.92]"
-          style={{ '--delay': '0.08s' } as React.CSSProperties}
-        >
-          Роблю сайти,
-          <br />
-          які <em className="font-light italic text-accent">видно</em>
-        </h1>
-
-        <div
-          className="reveal mt-12 flex flex-wrap items-end justify-between gap-8 border-t border-line pt-6"
-          style={{ '--delay': '0.16s' } as React.CSSProperties}
-        >
-          <p className="max-w-[42ch] text-sm leading-relaxed text-muted">
-            Лендінги, магазини й презентації, зібрані за рік. Тут вони живі: наведи на картку —
-            і побачиш сам сайт, а не скріншот.
-          </p>
-          <p className="num font-serif text-5xl text-ink">
-            {projects.length}
-            <span className="ml-2 align-super text-xs tracking-[0.2em] text-faint">
-              РОБІТ
-            </span>
-          </p>
-        </div>
-      </section>
-
-      <section className="grid gap-x-10 gap-y-20 py-20 md:grid-cols-2 md:gap-y-28">
-        {projects.map((project, i) => (
-          <div
-            key={project.slug}
-            className="reveal-on-scroll"
-            /* Кожна друга картка опускається нижче — сітка перестає читатись
-               як таблиця й починає читатись як розворот. */
-            style={i % 2 === 1 ? { marginTop: 'clamp(0px, 6vw, 5rem)' } : undefined}
-          >
-            <ProjectCard project={project} />
+    <main className="pb-16 pt-10" style={{ paddingInline: 'var(--gutter)' }}>
+      <header className="reveal">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <h1 className="text-4xl">Дошка</h1>
+            <p className="mt-2 text-sm text-muted">
+              {projects.length} проєктів · {active} в роботі
+              {flagged > 0 && <> · <span className="text-stale">{flagged} потребують уваги</span></>}
+            </p>
           </div>
+
+          <Stat label="Записано часу" value={`${Math.round(tracked / 60)} год`} />
+        </div>
+
+        <details className="card mt-8 p-5">
+          <summary className="list-none text-sm font-medium text-ink">
+            Скільки годин пішло
+            <span className="ml-2 font-normal text-faint">база для розрахунку ціни</span>
+          </summary>
+          <div className="pt-7">
+            <TimeSummary projects={projects} entries={entries} />
+          </div>
+        </details>
+      </header>
+
+      <div className="mt-10 flex gap-5 overflow-x-auto pb-6">
+        {BOARD_COLUMNS.map((column) => (
+          <BoardColumn
+            key={column.id}
+            column={column}
+            items={enriched[column.id]}
+            editable={editable}
+          />
         ))}
-      </section>
+      </div>
     </main>
+  )
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="text-right">
+      <p className="eyebrow">{label}</p>
+      <p className="num mt-1 font-serif text-3xl text-ink">{value}</p>
+    </div>
   )
 }

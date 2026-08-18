@@ -42,7 +42,7 @@ export function BoardColumn({
 
   return (
     <section
-      className="flex w-[19rem] shrink-0 flex-col"
+      className="flex w-[20rem] shrink-0 flex-col rounded-[var(--radius)] bg-raised/60 p-3"
       onDragOver={(event) => {
         if (!editable) return
         event.preventDefault()
@@ -52,19 +52,19 @@ export function BoardColumn({
       onDragLeave={() => setOver(false)}
       onDrop={drop}
     >
-      <header className="flex items-baseline justify-between gap-3 border-b border-line pb-3">
-        <h2 className="text-[0.8125rem] uppercase tracking-[0.12em] text-ink">{column.label}</h2>
-        <span className="num text-xs text-faint">{items.length}</span>
+      <header className="flex items-center justify-between gap-3 px-1 pb-3">
+        <h2 className="text-sm font-medium text-ink">{column.label}</h2>
+        <span className="num chip">{items.length}</span>
       </header>
 
       <div
-        className={`mt-4 flex flex-1 flex-col gap-3 transition-colors duration-200 ${
-          over ? 'bg-accent/5 outline outline-1 outline-accent/40' : ''
+        className={`flex flex-1 flex-col gap-3 rounded-[var(--radius-sm)] transition-colors duration-200 ${
+          over ? 'bg-accent-soft outline-2 outline-dashed outline-accent/50' : ''
         }`}
       >
         {items.length === 0 ? (
           // Порожня колонка не зникає — інакше дошка стрибає при кожному переносі.
-          <p className="border border-dashed border-line px-4 py-8 text-center text-xs text-faint">
+          <p className="rounded-[var(--radius-sm)] border border-dashed border-line px-4 py-8 text-center text-xs text-faint">
             Порожньо
           </p>
         ) : (

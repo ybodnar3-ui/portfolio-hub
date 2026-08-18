@@ -20,30 +20,30 @@ export default async function FeaturePage({ params }: { params: Promise<{ slug: 
   const notes = fs.existsSync(notesPath) ? fs.readFileSync(notesPath, 'utf8') : ''
 
   return (
-    <main className="pb-32" style={{ paddingInline: 'var(--gutter)' }}>
+    <main className="pb-20" style={{ paddingInline: 'var(--gutter)' }}>
       <div className="pt-10">
-        <Link href="/lab" className="eyebrow link-underline">
+        <Link href="/lab" className="btn btn-sm btn-quiet -ml-2">
           ← Усі фічі
         </Link>
       </div>
 
-      <header className="reveal border-b border-line pb-12 pt-14">
+      <header className="reveal border-b border-line pb-8 pt-8">
         <p className="eyebrow">
           з проєкту{' '}
-          <Link href={`/work/${feature.fromProject}`} className="link-underline text-muted">
+          <Link href={`/work/${feature.fromProject}`} className="text-muted underline decoration-line underline-offset-2 transition-colors hover:text-accent">
             {feature.fromProject}
           </Link>
         </p>
-        <h1 className="mt-5 text-[clamp(2.25rem,6vw,4.5rem)]">{feature.title}</h1>
-        <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-muted">{feature.summary}</p>
+        <h1 className="mt-3 text-[clamp(1.9rem,4vw,2.75rem)]">{feature.title}</h1>
+        <p className="mt-2 max-w-[62ch] text-[0.95rem] leading-relaxed text-muted">{feature.summary}</p>
 
-        <ul className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <ul className="mt-5 flex flex-wrap items-center gap-2">
           {feature.tags.map((tag) => (
-            <li key={tag} className="text-[0.6875rem] uppercase tracking-[0.14em] text-faint">
+            <li key={tag} className="chip">
               {tag}
             </li>
           ))}
-          <li className="text-[0.6875rem] uppercase tracking-[0.14em] text-accent">
+          <li className="chip border-accent/30 bg-accent-soft text-accent">
             {feature.deps.length === 0 ? 'без залежностей' : feature.deps.join(' · ')}
           </li>
         </ul>
@@ -57,12 +57,12 @@ export default async function FeaturePage({ params }: { params: Promise<{ slug: 
         <iframe
           src={`/features/${slug}/index.html`}
           title={`Демо: ${feature.title}`}
-          className="mt-4 h-[60vh] w-full border border-line bg-white"
+          className="card mt-4 h-[60vh] w-full bg-white"
           sandbox="allow-scripts"
         />
       </section>
 
-      <div className="grid gap-x-14 gap-y-12 pt-16 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+      <div className="grid gap-x-10 gap-y-10 pt-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
         <section>
           <h2 className="eyebrow">Код</h2>
           <div className="mt-4">
@@ -94,7 +94,7 @@ function Notes({ source }: { source: string }) {
         const heading = block.match(/^(#{1,3})\s+(.*)$/)
         if (heading) {
           return (
-            <h3 key={i} className="font-serif text-2xl text-ink">
+            <h3 key={i} className="font-serif text-lg text-ink">
               {heading[2]}
             </h3>
           )
@@ -127,7 +127,7 @@ function inline(text: string): React.ReactNode[] {
   return text.split(/(`[^`]+`|\*\*[^*]+\*\*)/g).map((part, i) => {
     if (part.startsWith('`') && part.endsWith('`')) {
       return (
-        <code key={i} className="bg-raised px-1.5 py-0.5 text-[0.8125rem] text-ink">
+        <code key={i} className="rounded bg-raised px-1.5 py-0.5 font-mono text-[0.8125rem] text-ink">
           {part.slice(1, -1)}
         </code>
       )

@@ -34,14 +34,14 @@ export function FeatureSearch({ features }: { features: Feature[] }) {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Пошук фічі…"
         aria-label="Пошук фічі"
-        className="w-full max-w-md border-b border-line-strong bg-transparent pb-3 text-lg text-ink outline-none transition-colors duration-300 placeholder:text-faint focus:border-accent"
+        className="w-full max-w-md rounded-[var(--radius-sm)] border border-line-strong bg-surface px-3.5 py-2.5 text-base text-ink outline-none transition-colors duration-200 placeholder:text-faint focus:border-accent"
       />
 
       {tags.length > 0 && (
         <div
           role="group"
           aria-label="Фільтр за тегом"
-          className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2"
+          className="mt-5 flex flex-wrap items-center gap-2"
         >
           <FilterButton active={tag === null} onClick={() => setTag(null)}>
             Усі
@@ -54,12 +54,12 @@ export function FeatureSearch({ features }: { features: Feature[] }) {
         </div>
       )}
 
-      <p className="num mt-8 text-xs tracking-[0.18em] text-faint">
+      <p className="num mt-6 text-xs text-faint">
         {shown.length} із {features.length}
       </p>
 
       {shown.length === 0 ? (
-        <p className="mt-10 font-serif text-2xl italic text-muted">Нічого не знайшлось.</p>
+        <p className="mt-8 font-serif text-xl text-muted">Нічого не знайшлось.</p>
       ) : (
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {shown.map((f) => (
@@ -86,9 +86,7 @@ function FilterButton({
       onClick={onClick}
       aria-pressed={active}
       data-active={active}
-      className={`link-underline text-[0.8125rem] tracking-[0.06em] transition-colors duration-300 ${
-        active ? 'text-accent' : 'text-muted hover:text-ink'
-      }`}
+      className={`btn btn-sm ${active ? 'btn-primary' : 'btn-quiet'}`}
     >
       {children}
     </button>

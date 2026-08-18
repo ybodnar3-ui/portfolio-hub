@@ -2,24 +2,6 @@
   "running": null,
   "entries": [
     {
-      "id": "e_0001",
-      "projectSlug": "aquastar",
-      "startedAt": "2026-08-03T16:05:16.422Z",
-      "endedAt": "2026-08-03T16:05:21.313Z",
-      "minutes": 0,
-      "note": "",
-      "source": "timer"
-    },
-    {
-      "id": "e_0002",
-      "projectSlug": "medcentar",
-      "startedAt": "2026-08-03T16:05:21.313Z",
-      "endedAt": "2026-08-03T16:05:34.896Z",
-      "minutes": 0,
-      "note": "",
-      "source": "timer"
-    },
-    {
       "id": "e_0003",
       "projectSlug": "aquastar",
       "startedAt": "2026-08-03T08:05:48.366Z",

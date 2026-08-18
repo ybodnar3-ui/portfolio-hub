@@ -20,9 +20,8 @@ const body = Manrope({
 })
 
 export const metadata: Metadata = {
-  title: 'Portfolio — Юра Боднар',
-  description:
-    'Усі vibe-coding проєкти в одному місці: вітрина робіт, бібліотека фіч і дошка стану.',
+  title: 'Хаб — внутрішній',
+  description: 'Внутрішній інструмент: дошка стану проєктів, облік часу і бібліотека фіч.',
 }
 
 export default function RootLayout({
@@ -37,7 +36,7 @@ export default function RootLayout({
       lang="uk"
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
-      <body className="grain flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col">
         <TimerProvider titles={titles}>
           <SiteHeader />
           {children}
