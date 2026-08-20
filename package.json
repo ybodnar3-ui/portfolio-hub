@@ -10,7 +10,11 @@
     "test": "vitest run",
     "scan": "node scripts/scan.mjs",
     "health": "node scripts/health.mjs",
-    "shots": "node scripts/shots.mjs"
+    "shots": "node scripts/shots.mjs",
+    "t": "node scripts/t.mjs",
+    "autostart:install": "node scripts/autostart.mjs install",
+    "autostart:uninstall": "node scripts/autostart.mjs uninstall",
+    "autostart:status": "node scripts/autostart.mjs status"
   },
   "dependencies": {
     "next": "16.2.12",
